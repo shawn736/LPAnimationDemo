@@ -24,6 +24,7 @@ class BaseViewController: UIViewController {
   func initUIView() {
     view.backgroundColor = .white
     let constraintHeight = self.navigationController?.navigationBar.frame.height ?? 0.0 + UIApplication.shared.statusBarFrame.height
+    let leftWidth = 100
     
     leftTableView = UITableView.init()
     leftTableView.backgroundColor = .green
@@ -33,14 +34,14 @@ class BaseViewController: UIViewController {
       make.left.equalToSuperview()
       make.top.equalTo(constraintHeight)
       make.bottom.equalToSuperview()
-      make.width.equalTo(100)
+      make.width.equalTo(leftWidth)
     }
     
     storyView = UIView.init()
     storyView.backgroundColor = .blue
     view.addSubview(storyView)
     storyView.snp.makeConstraints { (make) in
-      make.left.equalTo(100)
+      make.left.equalTo(leftWidth)
       make.top.equalTo(constraintHeight)
       make.bottom.equalToSuperview()
       make.right.equalToSuperview()
