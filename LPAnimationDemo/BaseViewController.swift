@@ -13,6 +13,7 @@ class BaseViewController: UIViewController {
   var leftTableView: UITableView! // 左侧列表
   var storyView: UIView! // 右侧演示动画的页面
   var storyImageView: UIImageView! //演示用的图片
+  let storyImageViewFrame = CGRect(x: 50, y: 50, width: 80, height: 104)
   
   fileprivate var titleName: String = "Animations"
   
@@ -24,8 +25,18 @@ class BaseViewController: UIViewController {
     self.navigationItem.rightBarButtonItem = rightItem
   }
   
-  @objc func startAnimation() {
-    
+  @objc func startAnimation() {}
+  
+  
+  func setStoryImageView() {
+    if let imageView = storyImageView {
+      if imageView.superview != nil {
+        imageView.removeFromSuperview()
+      }
+    }
+    storyImageView = UIImageView.init(frame: storyImageViewFrame)
+    storyImageView.image = UIImage.init(named: "balloon")
+    storyView.addSubview(storyImageView)
   }
   
   func initUIView() {
@@ -52,9 +63,7 @@ class BaseViewController: UIViewController {
       make.right.equalToSuperview()
     }
     
-    storyImageView = UIImageView.init(frame: CGRect(x: 50, y: 50, width: 80, height: 104))
-    storyImageView.image = UIImage.init(named: "balloon")
-    storyView.addSubview(storyImageView)
+    setStoryImageView()
     
   }
   

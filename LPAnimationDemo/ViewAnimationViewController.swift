@@ -17,11 +17,49 @@ class ViewAnimationViewController: BaseViewController {
   }
   
   let configData = ["Position And Size", "Appearance", "Transformation"]
+  let duration = 0.5
+  var animationType: BaseAnimationType = .positionAndSize
   
   override func viewDidLoad() {
     super.viewDidLoad()
     leftTableView.delegate = self
     leftTableView.dataSource = self
+  }
+  
+  override func startAnimation() {
+    switch animationType {
+    case .positionAndSize:
+      positionAndSizeAnimation()
+    case .appearance:
+      appearanceAnimation()
+    case .transformation:
+      transformationAnimation()
+    }
+  }
+  
+  func positionAndSizeAnimation() {
+    UIView.animate(withDuration: duration) {
+      self.storyImageView.bounds.size.width *= 1.2
+      self.storyImageView.center.x += 80
+      self.storyImageView.center.y += 100
+      self.storyImageView.frame.size.height *= 1.5
+    }
+  }
+  
+  func appearanceAnimation() {
+    UIView.animate(withDuration: duration) {
+      self.storyImageView.backgroundColor = .blue
+      self.storyImageView.alpha = 0.5
+    }
+  }
+  
+  func transformationAnimation() {
+    UIView.animate(withDuration: duration) {
+      let rotation = CGAffineTransform(rotationAngle: .pi/2)
+      let scale = CGAffineTransform(scaleX: 1.2, y: 1.5)
+      let position = CGAffineTransform(translationX: 80, y: 100)
+      self.storyImageView.transform = rotation.concatenating(scale).concatenating(position) // concatenating 把两个transform组合起来
+    }
   }
   
 }
@@ -44,6 +82,10 @@ extension ViewAnimationViewController: UITableViewDelegate, UITableViewDataSourc
     return cell
   }
   
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    animationType = BaseAnimationType.init(rawValue: indexPath.item) ?? .positionAndSize
+    setStoryImageView()
+  }
   
 }
 
