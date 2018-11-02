@@ -17,9 +17,11 @@ class ViewAnimationViewController: BaseViewController {
     case repeatingAndAutoreverse
     case easing
     case delayAndCompletion
+    case springAndZeroVelocity
+    case springAndVelocity
   }
   
-  let configData = ["Position And Size", "Appearance", "Transformation", "Repeating And Autoreverse", "Easing", "Delay And Completion"]
+  let configData = ["Position And Size", "Appearance", "Transformation", "Repeating And Autoreverse", "Easing", "Delay And Completion", "Spring And Zero Velocity", "Spring And Velocity"]
   let duration = 0.5
   var animationType: BaseAnimationType = .positionAndSize
   
@@ -43,7 +45,12 @@ class ViewAnimationViewController: BaseViewController {
       easingAnimation()
     case .delayAndCompletion:
       delayAndCompletionAnimation()
+    case .springAndZeroVelocity:
+      springAndZeroVelocityAnimation()
+    case .springAndVelocity:
+      springAndVelocityAnimation()
     }
+    
   }
   
   func positionAndSizeAnimation() {
@@ -98,6 +105,28 @@ class ViewAnimationViewController: BaseViewController {
       }, completion: nil)
      
     })
+  }
+  
+  func springAndZeroVelocityAnimation() {
+    /*
+     damping 阻尼值，0.0~1.0, 越小弹簧效果越明显
+     velocity 初始速度，如果object动画前就是静止的，建议给0这样看起来更流畅。
+     在保证duration总时长的前提下，damping越小，velocity越大，弹簧效果越明显
+     */
+    UIView.animate(withDuration: duration*10, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0, options: [], animations: {
+      self.storyImageView.center.y += 300
+    }, completion: nil)
+  }
+  
+  func springAndVelocityAnimation() {
+    /*
+     damping 阻尼值，0.0~1.0, 越小弹簧效果越明显
+     velocity 初始速度，如果object动画前就是静止的，建议给0这样看起来更流畅。
+     在保证duration总时长的前提下，damping越小，velocity越大，弹簧效果越明显
+     */
+    UIView.animate(withDuration: duration*10, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 20, options: [], animations: {
+      self.storyImageView.center.y += 300
+    }, completion: nil)
   }
   
 }
