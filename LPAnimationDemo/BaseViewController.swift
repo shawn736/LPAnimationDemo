@@ -27,6 +27,7 @@ class BaseViewController: UIViewController {
     
     leftTableView = UITableView.init()
     leftTableView.backgroundColor = .green
+    leftTableView.register(UINib.init(nibName: "mainCell", bundle: nil), forCellReuseIdentifier: "mainCell")
     view.addSubview(leftTableView)
     leftTableView.snp.makeConstraints { (make) in
       make.left.equalToSuperview()

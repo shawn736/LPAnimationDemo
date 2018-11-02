@@ -45,6 +45,7 @@
 		29E9BEA6218BF19E00DABFFB /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BE82218BF19E00DABFFB /* ConstraintLayoutSupportDSL.swift */; };
 		29E9BEA7218BF19E00DABFFB /* ConstraintMakerRelatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BE83218BF19E00DABFFB /* ConstraintMakerRelatable.swift */; };
 		29E9BEA8218BF19E00DABFFB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BE84218BF19E00DABFFB /* README.md */; };
+		29E9BEAA218BF4F200DABFFB /* mainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BEA9218BF4F200DABFFB /* mainCell.xib */; };
 		29F876A7218BE253005E368B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F876A6218BE253005E368B /* AppDelegate.swift */; };
 		29F876A9218BE253005E368B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F876A8218BE253005E368B /* MainViewController.swift */; };
 		29F876AC218BE253005E368B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29F876AA218BE253005E368B /* Main.storyboard */; };
@@ -91,6 +92,7 @@
 		29E9BE82218BF19E00DABFFB /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
 		29E9BE83218BF19E00DABFFB /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
 		29E9BE84218BF19E00DABFFB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		29E9BEA9218BF4F200DABFFB /* mainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = mainCell.xib; sourceTree = "<group>"; };
 		29F876A3218BE253005E368B /* LPAnimationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LPAnimationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29F876A6218BE253005E368B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29F876A8218BE253005E368B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			children = (
 				29E9BE5F218BF19E00DABFFB /* SnapKit */,
 				29E9BE17218BEC9600DABFFB /* ViewAnimationViewController.swift */,
+				29E9BEA9218BF4F200DABFFB /* mainCell.xib */,
 				29F876A6218BE253005E368B /* AppDelegate.swift */,
 				29F876A8218BE253005E368B /* MainViewController.swift */,
 				29F876AA218BE253005E368B /* Main.storyboard */,
@@ -252,6 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29E9BEAA218BF4F200DABFFB /* mainCell.xib in Resources */,
 				29F876B1218BE256005E368B /* LaunchScreen.storyboard in Resources */,
 				29F876AE218BE256005E368B /* Assets.xcassets in Resources */,
 				29E9BEA8218BF19E00DABFFB /* README.md in Resources */,
