@@ -22,9 +22,10 @@ class ViewAnimationViewController: BaseViewController {
     case hideTransition
     case repalceTransition
     case keyFrame
+    case autoLayout
   }
   
-  let configData = ["Position And Size", "Appearance", "Transformation", "Repeating And Autoreverse", "Easing", "Delay And Completion", "Spring And Zero Velocity", "Spring And Velocity", "Hide Transition", "Repalce Transition", "Key Frame"]
+  let configData = ["Position And Size", "Appearance", "Transformation", "Repeating And Autoreverse", "Easing", "Delay And Completion", "Spring And Zero Velocity", "Spring And Velocity", "Hide Transition", "Repalce Transition", "Key Frame", "Auto Layout"]
   var animationType: BaseAnimationType = .positionAndSize
   
   override func viewDidLoad() {
@@ -57,6 +58,8 @@ class ViewAnimationViewController: BaseViewController {
       replaceTransitionAnimation()
     case .keyFrame:
       keyFrameAnimation()
+    case .autoLayout:
+      autoLayoutAnimation()
     }
     
   }
@@ -159,6 +162,10 @@ class ViewAnimationViewController: BaseViewController {
   }
   
   func keyFrameAnimation() {
+    /*
+     relativeStartTime 开始的时间点，总时长的百分比，比如是0.5，那么就是中间时间点开始执行
+     relativeDuration 持续的时长，也是总时长的百分比，比如是0.25，表示持续总时长的25%
+     */
     UIView.animateKeyframes(withDuration: duration*4, delay: 0, options: [], animations: {
       UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.35, animations: {
         self.storyImageView.center.x += 100
@@ -175,13 +182,26 @@ class ViewAnimationViewController: BaseViewController {
       })
       UIView.addKeyframe(withRelativeStartTime: 0.51, relativeDuration: 0.01, animations: {
         self.storyImageView.transform = .identity
-        self.storyImageView.frame.origin.x = self.storyImageViewFrame.minX
+        self.storyImageView.frame.origin.x = self.initialStoryImageViewFrame.minX
       })
       UIView.addKeyframe(withRelativeStartTime: 0.55, relativeDuration: 0.45, animations: {
         self.storyImageView.alpha = 1.0
-        self.storyImageView.frame.origin.y = self.storyImageViewFrame.minY
+        self.storyImageView.frame.origin.y = self.initialStoryImageViewFrame.minY
       })
     }, completion: nil)
+  }
+  
+  func autoLayoutAnimation() {
+    UIView.animate(withDuration: duration) {
+      // 设置新的约束
+      self.storyImageView.snp.makeConstraints { (make) in
+        make.left.equalTo(100)
+        make.top.equalTo(150)
+        make.width.equalTo(self.initialStoryImageViewFrame.width*1.5)
+        make.height.equalTo(self.initialStoryImageViewFrame.height*1.5)
+      }
+      self.view.layoutIfNeeded() // 立即更新布局
+    }
   }
   
 }
