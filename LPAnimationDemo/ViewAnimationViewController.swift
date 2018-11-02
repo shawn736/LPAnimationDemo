@@ -16,10 +16,10 @@ class ViewAnimationViewController: BaseViewController {
     case transformation //transform
     case repeatingAndAutoreverse
     case easing
-    case completion
+    case delayAndCompletion
   }
   
-  let configData = ["Position And Size", "Appearance", "Transformation", "Repeating And Autoreverse", "Easing", "Completion"]
+  let configData = ["Position And Size", "Appearance", "Transformation", "Repeating And Autoreverse", "Easing", "Delay And Completion"]
   let duration = 0.5
   var animationType: BaseAnimationType = .positionAndSize
   
@@ -41,8 +41,8 @@ class ViewAnimationViewController: BaseViewController {
       repeatingAndAutoreverseAnimation()
     case .easing:
       easingAnimation()
-    case .completion:
-      completionAnimation()
+    case .delayAndCompletion:
+      delayAndCompletionAnimation()
     }
   }
   
@@ -89,13 +89,14 @@ class ViewAnimationViewController: BaseViewController {
     }, completion: nil)
   }
   
-  func completionAnimation() {
+  func delayAndCompletionAnimation() {
     UIView.animate(withDuration: duration, animations: {
       self.storyImageView.center.x += 80
     }, completion: { _ in
-      UIView.animate(withDuration: self.duration, animations: {
+      UIView.animate(withDuration: self.duration, delay: self.duration, options: [], animations: {
         self.storyImageView.center.y += 100
-      })
+      }, completion: nil)
+     
     })
   }
   
