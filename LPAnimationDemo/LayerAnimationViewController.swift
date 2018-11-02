@@ -9,18 +9,38 @@
 import UIKit
 
 class LayerAnimationViewController: BaseViewController {
+  
   enum BaseAnimationType: Int{
     case positionAndSize
     case border
     case shadow
     case contents
   }
-  
-  let configData = ["Position And Size", "Border", "Shadow", "Contents"]
   var animationType: BaseAnimationType = .positionAndSize
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    configData = ["Position And Size", "Border", "Shadow", "Contents"]
+  }
+  
+  override func startAnimation() {
+    switch animationType {
+    case .positionAndSize:
+      positionAndSizeAnimation()
+    default:
+      positionAndSizeAnimation()
+    }
+  }
+  
+  func positionAndSizeAnimation() {
+    /*
+     */
+    let animator = CABasicAnimation(keyPath: "position.y")
+    animator.toValue = storyImageLayer.frame.minY + 100
+    animator.duration = duration
+    storyImageLayer.add(animator, forKey: nil)
     
   }
+  
+  
 }

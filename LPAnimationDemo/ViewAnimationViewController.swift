@@ -25,13 +25,13 @@ class ViewAnimationViewController: BaseViewController {
     case autoLayout
   }
   
-  let configData = ["Position And Size", "Appearance", "Transformation", "Repeating And Autoreverse", "Easing", "Delay And Completion", "Spring And Zero Velocity", "Spring And Velocity", "Hide Transition", "Repalce Transition", "Key Frame", "Auto Layout"]
   var animationType: BaseAnimationType = .positionAndSize
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    configData = ["Position And Size", "Appearance", "Transformation", "Repeating And Autoreverse", "Easing", "Delay And Completion", "Spring And Zero Velocity", "Spring And Velocity", "Hide Transition", "Repalce Transition", "Key Frame", "Auto Layout"]
   }
-  
+
   override func startAnimation() {
     switch animationType {
     case .positionAndSize:
@@ -202,29 +202,10 @@ class ViewAnimationViewController: BaseViewController {
     }
   }
   
-}
-
-extension ViewAnimationViewController {
-  
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return configData.count
-  }
-  
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath)
-    let label = cell.viewWithTag(10) as! UILabel
-    label.font = UIFont.systemFont(ofSize: 14)
-    label.text = configData[indexPath.item]
-    label.backgroundColor = .gray
-    label.textColor = .white
-    return cell
-  }
-  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     animationType = BaseAnimationType.init(rawValue: indexPath.item) ?? .positionAndSize
     setStoryImageView()
   }
-  
 }
 
 
