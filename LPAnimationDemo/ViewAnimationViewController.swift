@@ -11,9 +11,9 @@ import UIKit
 class ViewAnimationViewController: BaseViewController {
   
   enum BaseAnimationType: Int{
-    case positionAndSize = 0 // bounds, frame, center
-    case appearance // backgroudColor, alpha
-    case transformation //transform
+    case positionAndSize
+    case appearance
+    case transformation
     case repeatingAndAutoreverse
     case easing
     case delayAndCompletion
@@ -100,7 +100,8 @@ class ViewAnimationViewController: BaseViewController {
     UIView.animate(withDuration: duration, animations: {
       self.storyImageView.center.x += 80
     }, completion: { _ in
-      UIView.animate(withDuration: self.duration, delay: self.duration, options: [], animations: {
+      // 延迟1秒后执行动画
+      UIView.animate(withDuration: self.duration, delay: 2, options: [], animations: {
         self.storyImageView.center.y += 100
       }, completion: nil)
      
