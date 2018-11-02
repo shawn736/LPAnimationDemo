@@ -27,20 +27,54 @@ class LayerAnimationViewController: BaseViewController {
     switch animationType {
     case .positionAndSize:
       positionAndSizeAnimation()
-    default:
-      positionAndSizeAnimation()
+    case .border:
+      borderAnimation()
+    case .shadow:
+      shadowAnimation()
+    case .contents:
+      contentsAnimation()
     }
   }
   
   func positionAndSizeAnimation() {
     /*
+     bounds
+     position
+     transform
      */
     let animator = CABasicAnimation(keyPath: "position.y")
-    animator.toValue = storyImageLayer.frame.minY + 100
-    animator.duration = duration
+    animator.fromValue = storyImageLayer.position.y - 100
+    animator.toValue = storyImageLayer.position.y + 400
+    animator.duration = duration*4
     storyImageLayer.add(animator, forKey: nil)
   
   }
+  
+  func borderAnimation() {
+    /*
+     borderColor
+     borderWidth
+     cornerRadius
+     */
+  }
+  
+  func shadowAnimation() {
+    /*
+     shadowOffset
+     shadowOpacity
+     shadowPath
+     shadowRadius
+     */
+  }
+  
+  func contentsAnimation() {
+    /*
+     contents
+     mask
+     opacity
+     */
+  }
+  
   
   override func didSelectRowAt(indexPath: IndexPath) {
     animationType = BaseAnimationType.init(rawValue: indexPath.item) ?? .positionAndSize
