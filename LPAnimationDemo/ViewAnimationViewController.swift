@@ -14,9 +14,11 @@ class ViewAnimationViewController: BaseViewController {
     case positionAndSize = 0 // bounds, frame, center
     case appearance // backgroudColor, alpha
     case transformation //transform
+    case repeatingAndAutoreverse
+    case easing
   }
   
-  let configData = ["Position And Size", "Appearance", "Transformation"]
+  let configData = ["Position And Size", "Appearance", "Transformation", "Repeating And Autoreverse", "Easing"]
   let duration = 0.5
   var animationType: BaseAnimationType = .positionAndSize
   
@@ -34,6 +36,10 @@ class ViewAnimationViewController: BaseViewController {
       appearanceAnimation()
     case .transformation:
       transformationAnimation()
+    case .repeatingAndAutoreverse:
+      repeatingAndAutoreverseAnimation()
+    case .easing:
+      easingAnimation()
     }
   }
   
@@ -54,12 +60,30 @@ class ViewAnimationViewController: BaseViewController {
   }
   
   func transformationAnimation() {
-    UIView.animate(withDuration: duration) {
+    UIView.animate(withDuration: duration*1.5) {
       let rotation = CGAffineTransform(rotationAngle: .pi/2)
       let scale = CGAffineTransform(scaleX: 1.2, y: 1.5)
       let position = CGAffineTransform(translationX: 80, y: 100)
       self.storyImageView.transform = rotation.concatenating(scale).concatenating(position) // concatenating 把两个transform组合起来
     }
+  }
+  
+  func repeatingAndAutoreverseAnimation() {
+    UIView.animate(withDuration: duration*1.5, delay: 0, options: [.repeat, .autoreverse], animations: {
+      self.storyImageView.center.y += 200
+    }, completion: nil)
+  }
+  
+  func easingAnimation() {
+    /*
+     curveLinear 全程匀速
+     curveEaseIn 前段加速后匀速
+     curveEaseOut 先匀速后段减速
+     curveEaseInOut 前段加速＋匀速+后段减速
+    */
+    UIView.animate(withDuration: duration*1.5, delay: 0, options: [.repeat, .autoreverse, .curveEaseOut], animations: {
+      self.storyImageView.center.y += 200
+    }, completion: nil)
   }
   
 }
