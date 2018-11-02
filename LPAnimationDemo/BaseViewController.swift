@@ -12,6 +12,7 @@ class BaseViewController: UIViewController {
   
   var leftTableView: UITableView! // 左侧列表
   var storyView: UIView! // 右侧演示动画的页面
+  var storyImageView: UIImageView! //演示用的图片
   
   fileprivate var titleName: String = "Animations"
   
@@ -19,6 +20,12 @@ class BaseViewController: UIViewController {
     super.viewDidLoad()
     initUIView()
     title = titleName
+    let rightItem = UIBarButtonItem.init(title: "Start", style: .plain, target: self, action: #selector(startAnimation))
+    self.navigationItem.rightBarButtonItem = rightItem
+  }
+  
+  @objc func startAnimation() {
+    
   }
   
   func initUIView() {
@@ -27,7 +34,6 @@ class BaseViewController: UIViewController {
     let leftWidth = 100
     
     leftTableView = UITableView.init()
-    leftTableView.backgroundColor = .green
     leftTableView.register(UINib.init(nibName: "mainCell", bundle: nil), forCellReuseIdentifier: "mainCell")
     view.addSubview(leftTableView)
     leftTableView.snp.makeConstraints { (make) in
@@ -38,7 +44,6 @@ class BaseViewController: UIViewController {
     }
     
     storyView = UIView.init()
-    storyView.backgroundColor = .blue
     view.addSubview(storyView)
     storyView.snp.makeConstraints { (make) in
       make.left.equalTo(leftWidth)
@@ -46,6 +51,11 @@ class BaseViewController: UIViewController {
       make.bottom.equalToSuperview()
       make.right.equalToSuperview()
     }
+    
+    storyImageView = UIImageView.init(frame: CGRect(x: 50, y: 50, width: 80, height: 104))
+    storyImageView.image = UIImage.init(named: "balloon")
+    storyView.addSubview(storyImageView)
+    
   }
   
   convenience init(titleName: String) {
