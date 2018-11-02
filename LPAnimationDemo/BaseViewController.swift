@@ -16,6 +16,7 @@ class BaseViewController: UIViewController {
   let storyImageViewFrame = CGRect(x: 50, y: 50, width: 80, height: 104)
   
   fileprivate var titleName: String = "Animations"
+  let duration = 0.5 //动画时长
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,11 +30,9 @@ class BaseViewController: UIViewController {
   
   
   func setStoryImageView() {
-    if let imageView = storyImageView {
-      if imageView.superview != nil {
-        imageView.removeFromSuperview()
-      }
-    }
+    
+    _ = storyView.subviews.map{ $0.removeFromSuperview() }
+
     storyImageView = UIImageView.init(frame: storyImageViewFrame)
     storyImageView.image = UIImage.init(named: "balloon")
     storyView.addSubview(storyImageView)

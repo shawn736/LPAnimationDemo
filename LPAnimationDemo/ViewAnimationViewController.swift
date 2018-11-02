@@ -19,10 +19,12 @@ class ViewAnimationViewController: BaseViewController {
     case delayAndCompletion
     case springAndZeroVelocity
     case springAndVelocity
+    case hideTransition
+    case repalceTransition
+    case keyFrame
   }
   
-  let configData = ["Position And Size", "Appearance", "Transformation", "Repeating And Autoreverse", "Easing", "Delay And Completion", "Spring And Zero Velocity", "Spring And Velocity"]
-  let duration = 0.5
+  let configData = ["Position And Size", "Appearance", "Transformation", "Repeating And Autoreverse", "Easing", "Delay And Completion", "Spring And Zero Velocity", "Spring And Velocity", "Hide Transition", "Repalce Transition", "Key Frame"]
   var animationType: BaseAnimationType = .positionAndSize
   
   override func viewDidLoad() {
@@ -49,6 +51,12 @@ class ViewAnimationViewController: BaseViewController {
       springAndZeroVelocityAnimation()
     case .springAndVelocity:
       springAndVelocityAnimation()
+    case .hideTransition:
+      hideTransitionAnimation()
+    case .repalceTransition:
+      replaceTransitionAnimation()
+    case .keyFrame:
+      keyFrameAnimation()
     }
     
   }
@@ -125,6 +133,54 @@ class ViewAnimationViewController: BaseViewController {
     UIView.animate(withDuration: duration*10, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 20, options: [], animations: {
       self.storyImageView.center.y += 300
       self.storyImageView.alpha = 0.3
+    }, completion: nil)
+  }
+  
+  func hideTransitionAnimation() {
+    /*
+     transitionFlipFromLeft   左半边往外面，右半边向里面，沿着垂直的中间轴翻转
+     transitionFlipFromRight   右半边往外面，左半边向里面，沿着垂直的中间轴翻转
+     transitionCurlUp  向上翻页
+     transitionCurlDown 向下翻页
+     transitionCrossDissolve 交叉消失和显示，从一个视图到另一个视图的过度（注：单个视图没有效果）
+     transitionFlipFromTop  上半边往外面，下半边向里面，沿着垂直的水平轴翻转
+     transitionFlipFromBottom  下半边往外面，上半边向里面，沿着垂直的水平轴翻转
+     */
+    UIView.transition(with: storyImageView, duration: duration, options: .transitionFlipFromBottom, animations: {
+      self.storyImageView.alpha = 0
+    }, completion: nil)
+  }
+  
+  func replaceTransitionAnimation() {
+    let newView = UIView.init(frame: storyImageView.frame)
+    newView.backgroundColor = .green
+    storyImageView.addSubview(newView)
+    UIView.transition(from: storyImageView, to: newView, duration: duration*4, options: .transitionCrossDissolve, completion: nil)
+  }
+  
+  func keyFrameAnimation() {
+    UIView.animateKeyframes(withDuration: duration*4, delay: 0, options: [], animations: {
+      UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.35, animations: {
+        self.storyImageView.center.x += 100
+        self.storyImageView.center.y += 100
+      })
+      UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.4, animations: {
+        self.storyImageView.transform = CGAffineTransform(rotationAngle: .pi/8)
+      })
+      
+      UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.25, animations: {
+        self.storyImageView.center.x += 100
+        self.storyImageView.center.y += 60
+        self.storyImageView.alpha = 0.0
+      })
+      UIView.addKeyframe(withRelativeStartTime: 0.51, relativeDuration: 0.01, animations: {
+        self.storyImageView.transform = .identity
+        self.storyImageView.frame.origin.x = self.storyImageViewFrame.minX
+      })
+      UIView.addKeyframe(withRelativeStartTime: 0.55, relativeDuration: 0.45, animations: {
+        self.storyImageView.alpha = 1.0
+        self.storyImageView.frame.origin.y = self.storyImageViewFrame.minY
+      })
     }, completion: nil)
   }
   
