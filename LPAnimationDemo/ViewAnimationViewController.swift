@@ -113,20 +113,18 @@ class ViewAnimationViewController: BaseViewController {
      damping 阻尼值，0.0~1.0, 越小弹簧效果越明显
      velocity 初始速度，如果object动画前就是静止的，建议给0这样看起来更流畅。
      在保证duration总时长的前提下，damping越小，velocity越大，弹簧效果越明显
+     不仅对位置/大小，对颜色/透明度等都会有弹簧效果
      */
     UIView.animate(withDuration: duration*10, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0, options: [], animations: {
       self.storyImageView.center.y += 300
+      self.storyImageView.alpha = 0.3
     }, completion: nil)
   }
   
   func springAndVelocityAnimation() {
-    /*
-     damping 阻尼值，0.0~1.0, 越小弹簧效果越明显
-     velocity 初始速度，如果object动画前就是静止的，建议给0这样看起来更流畅。
-     在保证duration总时长的前提下，damping越小，velocity越大，弹簧效果越明显
-     */
     UIView.animate(withDuration: duration*10, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 20, options: [], animations: {
       self.storyImageView.center.y += 300
+      self.storyImageView.alpha = 0.3
     }, completion: nil)
   }
   
