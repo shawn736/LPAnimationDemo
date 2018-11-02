@@ -213,7 +213,7 @@ extension ViewAnimationViewController: UITableViewDelegate, UITableViewDataSourc
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 50
+    return 45
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -221,6 +221,8 @@ extension ViewAnimationViewController: UITableViewDelegate, UITableViewDataSourc
     let label = cell.viewWithTag(10) as! UILabel
     label.font = UIFont.systemFont(ofSize: 14)
     label.text = configData[indexPath.item]
+    label.backgroundColor = .gray
+    label.textColor = .white
     return cell
   }
   

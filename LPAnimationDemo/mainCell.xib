@@ -19,17 +19,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="jYh-tH-dNZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                        <rect key="frame" x="10" y="5" width="355" height="39.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="jYh-tH-dNZ" firstAttribute="top" secondItem="RNY-Lr-W8Y" secondAttribute="top" id="9Pb-1K-wf6"/>
-                    <constraint firstAttribute="trailing" secondItem="jYh-tH-dNZ" secondAttribute="trailing" id="Mqy-Sj-AjF"/>
+                    <constraint firstItem="jYh-tH-dNZ" firstAttribute="top" secondItem="RNY-Lr-W8Y" secondAttribute="top" constant="5" id="9Pb-1K-wf6"/>
+                    <constraint firstAttribute="trailing" secondItem="jYh-tH-dNZ" secondAttribute="trailing" constant="10" id="Mqy-Sj-AjF"/>
                     <constraint firstItem="jYh-tH-dNZ" firstAttribute="centerY" secondItem="RNY-Lr-W8Y" secondAttribute="centerY" id="W3g-pQ-WVU"/>
-                    <constraint firstItem="jYh-tH-dNZ" firstAttribute="leading" secondItem="RNY-Lr-W8Y" secondAttribute="leading" id="e9Q-n4-Pd6"/>
+                    <constraint firstItem="jYh-tH-dNZ" firstAttribute="leading" secondItem="RNY-Lr-W8Y" secondAttribute="leading" constant="10" id="e9Q-n4-Pd6"/>
                 </constraints>
             </tableViewCellContentView>
         </tableViewCell>

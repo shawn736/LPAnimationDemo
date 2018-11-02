@@ -13,7 +13,7 @@ class BaseViewController: UIViewController {
   var leftTableView: UITableView! // 左侧列表
   var storyView: UIView! // 右侧演示动画的页面
   var storyImageView: UIImageView! //演示用的图片
-  let initialStoryImageViewFrame = CGRect(x: 50, y: 50, width: 80, height: 104)
+  let initialStoryImageViewFrame = CGRect(x: 20, y: 50, width: 80, height: 104)
   
   fileprivate var titleName: String = "Animations"
   let duration = 0.5 //动画时长
@@ -41,7 +41,7 @@ class BaseViewController: UIViewController {
   func initUIView() {
     view.backgroundColor = .white
     let constraintHeight = self.navigationController?.navigationBar.frame.height ?? 0.0 + UIApplication.shared.statusBarFrame.height
-    let leftWidth = 100
+    let leftWidth = 150
     
     leftTableView = UITableView.init()
     leftTableView.register(UINib.init(nibName: "mainCell", bundle: nil), forCellReuseIdentifier: "mainCell")
