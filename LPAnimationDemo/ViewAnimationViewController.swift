@@ -109,7 +109,7 @@ class ViewAnimationViewController: BaseViewController {
       self.storyImageView.center.x += 80
     }, completion: { _ in
       // 延迟1秒后执行动画
-      UIView.animate(withDuration: self.duration, delay: 2, options: [], animations: {
+      UIView.animate(withDuration: self.duration, delay: 1, options: [], animations: {
         self.storyImageView.center.y += 100
       }, completion: nil)
      
