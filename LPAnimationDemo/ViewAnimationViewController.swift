@@ -202,10 +202,11 @@ class ViewAnimationViewController: BaseViewController {
     }
   }
   
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  override func didSelectRowAt(indexPath: IndexPath) {
     animationType = BaseAnimationType.init(rawValue: indexPath.item) ?? .positionAndSize
     setStoryImageView()
   }
+  
 }
 
 

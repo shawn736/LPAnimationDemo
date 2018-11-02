@@ -39,7 +39,12 @@ class LayerAnimationViewController: BaseViewController {
     animator.toValue = storyImageLayer.frame.minY + 100
     animator.duration = duration
     storyImageLayer.add(animator, forKey: nil)
-    
+  
+  }
+  
+  override func didSelectRowAt(indexPath: IndexPath) {
+    animationType = BaseAnimationType.init(rawValue: indexPath.item) ?? .positionAndSize
+    setStoryImageView()
   }
   
   

@@ -76,6 +76,8 @@ class BaseViewController: UIViewController {
     self.init()
     self.titleName = titleName
   }
+  
+  func didSelectRowAt(indexPath: IndexPath) {}
 
 }
 
@@ -96,6 +98,10 @@ extension BaseViewController: UITableViewDelegate, UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 45
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    didSelectRowAt(indexPath: indexPath)
   }
   
 }
