@@ -16,9 +16,10 @@ class ViewAnimationViewController: BaseViewController {
     case transformation //transform
     case repeatingAndAutoreverse
     case easing
+    case completion
   }
   
-  let configData = ["Position And Size", "Appearance", "Transformation", "Repeating And Autoreverse", "Easing"]
+  let configData = ["Position And Size", "Appearance", "Transformation", "Repeating And Autoreverse", "Easing", "Completion"]
   let duration = 0.5
   var animationType: BaseAnimationType = .positionAndSize
   
@@ -40,6 +41,8 @@ class ViewAnimationViewController: BaseViewController {
       repeatingAndAutoreverseAnimation()
     case .easing:
       easingAnimation()
+    case .completion:
+      completionAnimation()
     }
   }
   
@@ -63,7 +66,7 @@ class ViewAnimationViewController: BaseViewController {
     UIView.animate(withDuration: duration*1.5) {
       let rotation = CGAffineTransform(rotationAngle: .pi/2)
       let scale = CGAffineTransform(scaleX: 1.2, y: 1.5)
-      let position = CGAffineTransform(translationX: 80, y: 100)
+      let position = CGAffineTransform(translationX: 80, y: 200)
       self.storyImageView.transform = rotation.concatenating(scale).concatenating(position) // concatenating 把两个transform组合起来
     }
   }
@@ -84,6 +87,16 @@ class ViewAnimationViewController: BaseViewController {
     UIView.animate(withDuration: duration*1.5, delay: 0, options: [.repeat, .autoreverse, .curveEaseOut], animations: {
       self.storyImageView.center.y += 200
     }, completion: nil)
+  }
+  
+  func completionAnimation() {
+    UIView.animate(withDuration: duration, animations: {
+      self.storyImageView.center.x += 80
+    }, completion: { _ in
+      UIView.animate(withDuration: self.duration, animations: {
+        self.storyImageView.center.y += 100
+      })
+    })
   }
   
 }
