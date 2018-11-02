@@ -30,8 +30,6 @@ class ViewAnimationViewController: BaseViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    leftTableView.delegate = self
-    leftTableView.dataSource = self
   }
   
   override func startAnimation() {
@@ -206,17 +204,13 @@ class ViewAnimationViewController: BaseViewController {
   
 }
 
-extension ViewAnimationViewController: UITableViewDelegate, UITableViewDataSource {
+extension ViewAnimationViewController {
   
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return configData.count
   }
   
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 45
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath)
     let label = cell.viewWithTag(10) as! UILabel
     label.font = UIFont.systemFont(ofSize: 14)

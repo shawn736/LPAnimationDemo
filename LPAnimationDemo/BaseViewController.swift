@@ -13,6 +13,9 @@ class BaseViewController: UIViewController {
   var leftTableView: UITableView! // 左侧列表
   var storyView: UIView! // 右侧演示动画的页面
   var storyImageView: UIImageView! //演示用的图片
+  var storyImageLayer: CALayer {
+    return storyImageView.layer
+  }
   let initialStoryImageViewFrame = CGRect(x: 20, y: 50, width: 80, height: 104)
   
   fileprivate var titleName: String = "Animations"
@@ -44,6 +47,8 @@ class BaseViewController: UIViewController {
     let leftWidth = 150
     
     leftTableView = UITableView.init()
+    leftTableView.delegate = self
+    leftTableView.dataSource = self
     leftTableView.register(UINib.init(nibName: "mainCell", bundle: nil), forCellReuseIdentifier: "mainCell")
     view.addSubview(leftTableView)
     leftTableView.snp.makeConstraints { (make) in
@@ -71,5 +76,22 @@ class BaseViewController: UIViewController {
     self.titleName = titleName
   }
 
+}
+
+extension BaseViewController: UITableViewDelegate, UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 0
+  }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 45
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath)
+    return cell
+  }
+  
+  
 }
 

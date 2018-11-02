@@ -38,7 +38,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     case 0:
       let vc = ViewAnimationViewController(titleName: configData[indexPath.item])
       navigationController?.pushViewController(vc, animated: true)
-      
+    case 1:
+      let vc = LayerAnimationViewController(titleName: configData[indexPath.item])
+      navigationController?.pushViewController(vc, animated: true)
     default:
       //
       let vc = ViewAnimationViewController(titleName: configData[indexPath.item])
