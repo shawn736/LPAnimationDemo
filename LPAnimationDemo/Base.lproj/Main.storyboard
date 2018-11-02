@@ -30,14 +30,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ux2-Xe-qkx">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ux2-Xe-qkx">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ux2-Xe-qkx" firstAttribute="leading" secondItem="aI4-QQ-aaN" secondAttribute="leading" id="6Im-Kh-AFQ"/>
+                                                <constraint firstItem="ux2-Xe-qkx" firstAttribute="top" secondItem="aI4-QQ-aaN" secondAttribute="top" id="76Y-wd-kbK"/>
+                                                <constraint firstAttribute="trailing" secondItem="ux2-Xe-qkx" secondAttribute="trailing" id="Bf7-vu-oRk"/>
+                                                <constraint firstItem="ux2-Xe-qkx" firstAttribute="centerY" secondItem="aI4-QQ-aaN" secondAttribute="centerY" id="kzu-jI-6Zb"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>

@@ -15,7 +15,6 @@ class MainViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "iOS Animations"
-    
   }
 
 }
@@ -32,6 +31,18 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     return cell
   }
   
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    switch indexPath.item {
+    case 0:
+      let vc = ViewAnimationViewController(titleName: configData[indexPath.item])
+      navigationController?.pushViewController(vc, animated: true)
+      
+    default:
+      //
+      let vc = ViewAnimationViewController(titleName: configData[indexPath.item])
+      navigationController?.pushViewController(vc, animated: true)
+    }
+  }
   
 }
 
