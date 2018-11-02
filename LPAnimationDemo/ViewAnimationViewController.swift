@@ -72,7 +72,7 @@ class ViewAnimationViewController: BaseViewController {
   }
   
   func repeatingAndAutoreverseAnimation() {
-    UIView.animate(withDuration: duration*1.5, delay: 0, options: [.repeat, .autoreverse], animations: {
+    UIView.animate(withDuration: duration, delay: 0, options: [.repeat, .autoreverse], animations: {
       self.storyImageView.center.y += 200
     }, completion: nil)
   }
@@ -84,7 +84,7 @@ class ViewAnimationViewController: BaseViewController {
      curveEaseOut 先匀速后段减速
      curveEaseInOut 前段加速＋匀速+后段减速
     */
-    UIView.animate(withDuration: duration*1.5, delay: 0, options: [.repeat, .autoreverse, .curveEaseOut], animations: {
+    UIView.animate(withDuration: duration, delay: 0, options: [.repeat, .autoreverse, .curveEaseOut], animations: {
       self.storyImageView.center.y += 200
     }, completion: nil)
   }
