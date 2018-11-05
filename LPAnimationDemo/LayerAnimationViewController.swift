@@ -22,12 +22,13 @@ class LayerAnimationViewController: BaseViewController {
     case keyframe
     case shapeMask
     case gradient
+    case strokeAndPath
   }
   var animationType: BaseAnimationType = .positionAndSize
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["Position And Size", "Border", "Shadow", "Contents", "Animations Keys & Delegate", "Groups & Advanced Timing", "Repeat & Speed", "Spring", "Keyframe", "Shape & Mask", "Gradient"]
+    configData = ["Position And Size", "Border", "Shadow", "Contents", "Animations Keys & Delegate", "Groups & Advanced Timing", "Repeat & Speed", "Spring", "Keyframe", "Shape & Mask", "Gradient", "Stroke & Path"]
   }
   
   override func didSelectRowAt(indexPath: IndexPath) {
@@ -59,6 +60,8 @@ class LayerAnimationViewController: BaseViewController {
       shapeMaskAnimation()
     case .gradient:
       gradientAnimation()
+    case .strokeAndPath:
+      strokeAndPathAnimation()
     }
   }
   
@@ -285,6 +288,55 @@ class LayerAnimationViewController: BaseViewController {
     gradientLayer.add(gradientAnimation, forKey: nil)
     
     storyImageLayer.addSublayer(gradientLayer)
+  }
+  
+  func strokeAndPathAnimation() {
+    let ovalShapeLayer = CAShapeLayer()
+    ovalShapeLayer.strokeColor = UIColor.blue.cgColor
+    ovalShapeLayer.fillColor = UIColor.clear.cgColor
+    ovalShapeLayer.lineWidth = 4.0
+    ovalShapeLayer.lineDashPattern = [2, 3]
+    
+    let rect = CGRect(x: 0, y: (storyImageLayer.frame.height - storyImageLayer.frame.width)*0.5, width: storyImageLayer.frame.width, height: storyImageLayer.frame.width)
+    ovalShapeLayer.path = UIBezierPath(ovalIn: rect).cgPath
+    storyImageLayer.addSublayer(ovalShapeLayer)
+    
+    let planeLayer = CAShapeLayer()
+    planeLayer.contents = UIImage(named: "plane")?.cgImage
+    planeLayer.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
+    planeLayer.position = CGPoint(x: storyImageLayer.bounds.width, y: (storyImageLayer.bounds.height)*0.5)
+    planeLayer.transform = CATransform3DMakeRotation(CGFloat(-(3.0 * Double.pi / 2)), 0, 0, 1)
+    storyImageLayer.addSublayer(planeLayer)
+    
+    let strokeStartAnimation = CABasicAnimation(keyPath: "strokeStart")
+    strokeStartAnimation.fromValue = -0.5
+    strokeStartAnimation.toValue = 1.0
+    
+    let strokeEndAnimation = CABasicAnimation(keyPath: "strokeEnd")
+    strokeEndAnimation.fromValue = 0.0
+    strokeEndAnimation.toValue = 1.0
+    
+    let strokeAnimationGroup = CAAnimationGroup()
+    strokeAnimationGroup.duration = 1.5
+    strokeAnimationGroup.repeatDuration = 5.0
+    strokeAnimationGroup.animations = [strokeStartAnimation, strokeEndAnimation]
+    ovalShapeLayer.add(strokeAnimationGroup, forKey: nil)
+    
+    let flightAnimation = CAKeyframeAnimation(keyPath: "position")
+    flightAnimation.path = ovalShapeLayer.path
+    flightAnimation.calculationMode = .paced
+//    flightAnimation.rotationMode = .rotateAuto // 有了这个rotateAuto，就可以不用airplaneOrientationAnimation来设置旋转。
+    
+    let airplaneOrientationAnimation = CABasicAnimation(keyPath: "transform.rotation")
+    airplaneOrientationAnimation.fromValue = -(3.0 * Double.pi / 2)
+    airplaneOrientationAnimation.toValue = Double.pi / 2
+    
+    let flightAnimationGroup = CAAnimationGroup()
+    flightAnimationGroup.duration = 1.5
+    flightAnimationGroup.repeatDuration = 5.0
+    flightAnimationGroup.animations = [flightAnimation, airplaneOrientationAnimation]
+    planeLayer.add(flightAnimationGroup, forKey: nil)
+    
   }
   
 }
