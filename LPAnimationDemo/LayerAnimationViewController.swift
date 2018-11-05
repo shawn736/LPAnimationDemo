@@ -15,12 +15,13 @@ class LayerAnimationViewController: BaseViewController {
     case border
     case shadow
     case contents
+    case animationsKeysAndDelegate
   }
   var animationType: BaseAnimationType = .positionAndSize
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["Position And Size", "Border", "Shadow", "Contents"]
+    configData = ["Position And Size", "Border", "Shadow", "Contents", "Animations Keys & Delegate"]
   }
   
   override func startAnimation() {
@@ -33,6 +34,8 @@ class LayerAnimationViewController: BaseViewController {
       shadowAnimation()
     case .contents:
       contentsAnimation()
+    case .animationsKeysAndDelegate:
+      animationsKeysAndDelegateAnimation()
     }
   }
   
@@ -112,11 +115,39 @@ class LayerAnimationViewController: BaseViewController {
     storyImageLayer.add(animator, forKey: nil)
   }
   
+  func animationsKeysAndDelegateAnimation() {
+    // 先放大到1.25倍，通过delegate，缩小到0.5倍
+    let animator = CABasicAnimation(keyPath: "transform.scale")
+    animator.toValue = 1.25
+    animator.duration = duration*4
+    animator.fillMode = .forwards
+    animator.isRemovedOnCompletion = false
+    animator.setValue("scale", forKey: "name")
+    animator.delegate = self
+    storyImageLayer.add(animator, forKey: nil)
+  }
   
   override func didSelectRowAt(indexPath: IndexPath) {
     animationType = BaseAnimationType.init(rawValue: indexPath.item) ?? .positionAndSize
     setStoryImageView()
   }
   
-  
+}
+
+extension LayerAnimationViewController: CAAnimationDelegate {
+  func animationDidStart(_ anim: CAAnimation) {
+    
+  }
+  func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+    if flag {
+      if let name = anim.value(forKey: "name") as? String, name == "scale" {
+        let animator = CABasicAnimation(keyPath: "transform.scale")
+        animator.toValue = 0.5
+        animator.duration = duration
+        animator.fillMode = .forwards
+        animator.isRemovedOnCompletion = false
+        storyImageLayer.add(animator, forKey: nil)
+      }
+    }
+  }
 }
