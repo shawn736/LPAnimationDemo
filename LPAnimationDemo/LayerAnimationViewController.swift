@@ -19,12 +19,18 @@ class LayerAnimationViewController: BaseViewController {
     case groupsAndAdvancedTiming
     case repeatAndSpeed
     case spring
+    case keyframeAnimation
   }
   var animationType: BaseAnimationType = .positionAndSize
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["Position And Size", "Border", "Shadow", "Contents", "Animations Keys & Delegate", "Groups & Advanced Timing", "Repeat & Speed", "Spring"]
+    configData = ["Position And Size", "Border", "Shadow", "Contents", "Animations Keys & Delegate", "Groups & Advanced Timing", "Repeat & Speed", "Spring", "Keyframe Animation"]
+  }
+  
+  override func didSelectRowAt(indexPath: IndexPath) {
+    animationType = BaseAnimationType.init(rawValue: indexPath.item) ?? .positionAndSize
+    setStoryImageView()
   }
   
   override func startAnimation() {
@@ -45,6 +51,8 @@ class LayerAnimationViewController: BaseViewController {
       repeatAndSpeedAnimation()
     case .spring:
       springAnimation()
+    case .keyframeAnimation:
+      keyframeAnimation()
     }
   }
   
@@ -197,10 +205,19 @@ class LayerAnimationViewController: BaseViewController {
     storyImageLayer.add(animator, forKey: "scaleAnimator")
   }
   
-  override func didSelectRowAt(indexPath: IndexPath) {
-    animationType = BaseAnimationType.init(rawValue: indexPath.item) ?? .positionAndSize
-    setStoryImageView()
+  func keyframeAnimation() {
+    let animator = CAKeyframeAnimation(keyPath: "position")
+    animator.duration = duration * 4
+    animator.values = [
+      CGPoint(x: storyImageLayer.position.x, y: storyImageLayer.position.y),
+      CGPoint(x: storyImageLayer.position.x + 80.0, y: storyImageLayer.position.y),
+      CGPoint(x: storyImageLayer.position.x + 30.0, y: storyImageLayer.position.y + 100.0),
+      CGPoint(x: storyImageLayer.position.x, y: storyImageLayer.position.y)
+      ].map{ NSValue(cgPoint: $0)}
+    animator.keyTimes = [0.0, 0.25, 0.5, 1.0]
+    storyImageLayer.add(animator, forKey: nil)
   }
+  
   
 }
 
