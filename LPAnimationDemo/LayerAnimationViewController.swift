@@ -20,12 +20,13 @@ class LayerAnimationViewController: BaseViewController {
     case repeatAndSpeed
     case spring
     case keyframeAnimation
+    case shapeMask
   }
   var animationType: BaseAnimationType = .positionAndSize
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["Position And Size", "Border", "Shadow", "Contents", "Animations Keys & Delegate", "Groups & Advanced Timing", "Repeat & Speed", "Spring", "Keyframe Animation"]
+    configData = ["Position And Size", "Border", "Shadow", "Contents", "Animations Keys & Delegate", "Groups & Advanced Timing", "Repeat & Speed", "Spring", "Keyframe Animation", "Shape & Mask"]
   }
   
   override func didSelectRowAt(indexPath: IndexPath) {
@@ -53,6 +54,8 @@ class LayerAnimationViewController: BaseViewController {
       springAnimation()
     case .keyframeAnimation:
       keyframeAnimation()
+    case .shapeMask:
+      shapeMaskAnimation()
     }
   }
   
@@ -211,13 +214,35 @@ class LayerAnimationViewController: BaseViewController {
     animator.values = [
       CGPoint(x: storyImageLayer.position.x, y: storyImageLayer.position.y),
       CGPoint(x: storyImageLayer.position.x + 80.0, y: storyImageLayer.position.y),
-      CGPoint(x: storyImageLayer.position.x + 30.0, y: storyImageLayer.position.y + 100.0),
+      CGPoint(x: storyImageLayer.position.x + 40.0, y: storyImageLayer.position.y + 100.0),
       CGPoint(x: storyImageLayer.position.x, y: storyImageLayer.position.y)
-      ].map{ NSValue(cgPoint: $0)}
+      ]
     animator.keyTimes = [0.0, 0.25, 0.5, 1.0]
+    
     storyImageLayer.add(animator, forKey: nil)
   }
   
+  func shapeMaskAnimation() {
+    storyImageLayer.backgroundColor = UIColor.blue.cgColor //给个背景色，效果会明显些
+    let rect = CGRect(x: 0, y: (storyImageLayer.frame.height - storyImageLayer.frame.width)*0.5, width: storyImageLayer.frame.width, height: storyImageLayer.frame.width)
+    
+    let circlePath = UIBezierPath(ovalIn: rect).cgPath
+    let squarePath = UIBezierPath(rect: rect).cgPath
+    
+    let animator = CABasicAnimation(keyPath: "path")
+    animator.duration = duration
+    animator.fromValue = squarePath
+    animator.toValue = circlePath
+    animator.beginTime = CACurrentMediaTime() + duration
+    animator.fillMode = .both
+    animator.isRemovedOnCompletion = false
+    
+    let maskLayer = CAShapeLayer()
+    maskLayer.path = squarePath
+    maskLayer.add(animator, forKey: nil)
+    storyImageLayer.mask = maskLayer
+
+  }
   
 }
 
