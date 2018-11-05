@@ -124,7 +124,9 @@ class LayerAnimationViewController: BaseViewController {
     animator.isRemovedOnCompletion = false
     animator.setValue("scale", forKey: "name")
     animator.delegate = self
-    storyImageLayer.add(animator, forKey: nil)
+    
+    storyImageLayer.add(animator, forKey: "scaleAnimator")   //设置指定的key, 需要移除指定的动画时，就可以通过storyImageLayer.removeAnimation(forKey: "scaleAnimator")；  移除所有的动画 storyImageLayer.removeAllAnimations()
+
   }
   
   override func didSelectRowAt(indexPath: IndexPath) {
