@@ -23,12 +23,13 @@ class LayerAnimationViewController: BaseViewController {
     case shapeMask
     case gradient
     case strokeAndPath
+    case replicate
   }
   var animationType: BaseAnimationType = .positionAndSize
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["Position And Size", "Border", "Shadow", "Contents", "Animations Keys & Delegate", "Groups & Advanced Timing", "Repeat & Speed", "Spring", "Keyframe", "Shape & Mask", "Gradient", "Stroke & Path"]
+    configData = ["Position And Size", "Border", "Shadow", "Contents", "Animations Keys & Delegate", "Groups & Advanced Timing", "Repeat & Speed", "Spring", "Keyframe", "Shape & Mask", "Gradient", "Stroke & Path", "Replicate"]
   }
   
   override func didSelectRowAt(indexPath: IndexPath) {
@@ -62,6 +63,8 @@ class LayerAnimationViewController: BaseViewController {
       gradientAnimation()
     case .strokeAndPath:
       strokeAndPathAnimation()
+    case .replicate:
+      replicateAnimation()
     }
   }
   
@@ -337,6 +340,32 @@ class LayerAnimationViewController: BaseViewController {
     flightAnimationGroup.animations = [flightAnimation, airplaneOrientationAnimation]
     planeLayer.add(flightAnimationGroup, forKey: nil)
     
+  }
+  
+  func replicateAnimation() {
+    let replicator = CAReplicatorLayer()
+    replicator.frame = storyImageLayer.bounds
+    storyImageLayer.addSublayer(replicator)
+    let dot = CALayer()
+    let dotLength: CGFloat = 6.0
+    let dotOffset: CGFloat = 8.0
+    dot.frame = CGRect(x: replicator.frame.size.width - dotLength, y: replicator.position.y, width: dotLength, height: dotLength)
+    dot.backgroundColor = UIColor.lightGray.cgColor
+    dot.borderColor = UIColor.red.cgColor
+    dot.borderWidth = 0.5
+    dot.cornerRadius = 1.5
+    replicator.addSublayer(dot)
+    replicator.instanceCount = Int(storyImageLayer.frame.size.width / dotOffset)
+    replicator.instanceTransform = CATransform3DMakeTranslation(-dotOffset, 0.0, 0.0)
+    
+    let animator = CABasicAnimation(keyPath: "position.y")
+    animator.fromValue = dot.position.y
+    animator.toValue = dot.position.y - 50.0
+    animator.duration = 1.0
+    animator.repeatCount = 10
+    animator.autoreverses = true
+    dot.add(animator, forKey: nil)
+    replicator.instanceDelay = 0.02 //每个点之间延迟的时间
   }
   
 }
