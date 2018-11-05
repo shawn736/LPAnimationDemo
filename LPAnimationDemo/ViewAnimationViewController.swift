@@ -153,10 +153,11 @@ class ViewAnimationViewController: BaseViewController {
   }
   
   func replaceTransitionAnimation() {
-    let newView = UIView.init(frame: storyImageView.frame)
-    newView.backgroundColor = .green
-    storyImageView.addSubview(newView)
-    UIView.transition(from: storyImageView, to: newView, duration: duration*4, options: .transitionCrossDissolve, completion: nil)
+    let newImageView = UIImageView(frame: storyImageView.frame)
+    newImageView.image = UIImage(named: "plane")
+    
+    storyImageView.addSubview(newImageView)
+    UIView.transition(from: storyImageView, to: newImageView, duration: duration*4, options: .transitionCrossDissolve, completion: nil)
   }
   
   func keyFrameAnimation() {
