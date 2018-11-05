@@ -29,7 +29,7 @@ class ViewAnimationViewController: BaseViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["Position And Size", "Appearance", "Transformation", "Repeating And Autoreverse", "Easing", "Delay And Completion", "Spring And Zero Velocity", "Spring And Velocity", "Hide Transition", "Repalce Transition", "Key Frame", "Auto Layout"]
+    configData = ["Position & Size", "Appearance", "Transformation", "Repeating & Autoreverse", "Easing", "Delay & Completion", "Spring & Zero Velocity", "Spring & Velocity", "Hide Transition", "Repalce Transition", "Key Frame", "Auto Layout"]
   }
 
   override func startAnimation() {
@@ -96,9 +96,9 @@ class ViewAnimationViewController: BaseViewController {
   func easingAnimation() {
     /*
      curveLinear 全程匀速
-     curveEaseIn 前段加速后匀速
-     curveEaseOut 先匀速后段减速
-     curveEaseInOut 前段加速＋匀速+后段减速
+     curveEaseIn 前段加速
+     curveEaseOut 后段减速
+     curveEaseInOut 前段加速+后段减速
     */
     UIView.animate(withDuration: duration, delay: 0, options: [.repeat, .autoreverse, .curveEaseOut], animations: {
       self.storyImageView.center.y += 200

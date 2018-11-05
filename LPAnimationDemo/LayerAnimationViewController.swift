@@ -16,12 +16,14 @@ class LayerAnimationViewController: BaseViewController {
     case shadow
     case contents
     case animationsKeysAndDelegate
+    case groupsAndAdvancedTiming
+    case repeatAndSpeed
   }
   var animationType: BaseAnimationType = .positionAndSize
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["Position And Size", "Border", "Shadow", "Contents", "Animations Keys & Delegate"]
+    configData = ["Position And Size", "Border", "Shadow", "Contents", "Animations Keys & Delegate", "Groups & Advanced Timing", "Repeat & Speed"]
   }
   
   override func startAnimation() {
@@ -36,6 +38,10 @@ class LayerAnimationViewController: BaseViewController {
       contentsAnimation()
     case .animationsKeysAndDelegate:
       animationsKeysAndDelegateAnimation()
+    case .groupsAndAdvancedTiming:
+      groupsAndAdvancedTimingAnimation()
+    case .repeatAndSpeed:
+      repeatAndSpeedAnimation()
     }
   }
   
@@ -127,6 +133,45 @@ class LayerAnimationViewController: BaseViewController {
     
     storyImageLayer.add(animator, forKey: "scaleAnimator")   //设置指定的key, 需要移除指定的动画时，就可以通过storyImageLayer.removeAnimation(forKey: "scaleAnimator")；  移除所有的动画 storyImageLayer.removeAllAnimations()
 
+  }
+  /*
+   CAMediaTimingFunction
+   linear - 匀速
+   easeIn - 前段加速
+   easeOut - 后段减速
+   easeInEaseOut - 前段加速+后段减速
+   */
+  func groupsAndAdvancedTimingAnimation() {
+    let groupAnimation = CAAnimationGroup()
+    groupAnimation.beginTime = CACurrentMediaTime() + 0.5
+    groupAnimation.duration = duration
+    groupAnimation.fillMode = .backwards
+    
+    let scaleDown = CABasicAnimation(keyPath: "transform.scale")
+    scaleDown.fromValue = 3.5
+    scaleDown.toValue = 1.0
+    
+    let rotate = CABasicAnimation(keyPath: "transform.rotation")
+    rotate.fromValue = .pi/4.0
+    rotate.toValue = 0.0
+    
+    let fade = CABasicAnimation(keyPath: "opacity")
+    fade.fromValue = 0.0
+    fade.toValue = 1.0
+    
+    groupAnimation.animations = [scaleDown, rotate, fade]
+    groupAnimation.timingFunction = CAMediaTimingFunction(name: .easeIn)
+    storyImageLayer.add(groupAnimation, forKey: nil)
+  }
+  
+  func repeatAndSpeedAnimation() {
+    let animator = CABasicAnimation(keyPath: "position.y")
+    animator.toValue = storyImageLayer.position.y + 400
+    animator.duration = duration*4
+    animator.repeatCount = 4
+    animator.autoreverses = true
+    animator.speed = 5.0 // 几倍速
+    storyImageLayer.add(animator, forKey: nil)
   }
   
   override func didSelectRowAt(indexPath: IndexPath) {
