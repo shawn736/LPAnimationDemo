@@ -41,8 +41,19 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     case 1:
       let vc = LayerAnimationViewController(titleName: configData[indexPath.item])
       navigationController?.pushViewController(vc, animated: true)
+    case 2:
+      let vc = ViewControllerTransitionsViewController(titleName: configData[indexPath.item])
+      navigationController?.pushViewController(vc, animated: true)
+    case 3:
+      let vc = UIViewPropertyAnimatorViewController(titleName: configData[indexPath.item])
+      navigationController?.pushViewController(vc, animated: true)
+    case 4:
+      let vc = TreeDAnimationsViewController(titleName: configData[indexPath.item])
+      navigationController?.pushViewController(vc, animated: true)
+    case 5:
+      let vc = FurtherTypesViewController(titleName: configData[indexPath.item])
+      navigationController?.pushViewController(vc, animated: true)
     default:
-      //
       let vc = ViewAnimationViewController(titleName: configData[indexPath.item])
       navigationController?.pushViewController(vc, animated: true)
     }

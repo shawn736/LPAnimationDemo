@@ -33,6 +33,11 @@ class ViewAnimationViewController: BaseViewController {
     configData = ["Position & Size", "Appearance", "Transformation", "Repeating & Autoreverse", "Easing", "Delay & Completion", "Spring & Zero Velocity", "Spring & Velocity", "Hide Transition", "Repalce Transition", "Key Frame", "Auto Layout"]
   }
 
+  override func didSelectRowAt(indexPath: IndexPath) {
+    animationType = BaseAnimationType.init(rawValue: indexPath.item) ?? .positionAndSize
+    setStoryImageView()
+  }
+  
   override func startAnimation() {
     switch animationType {
     case .positionAndSize:
@@ -202,11 +207,6 @@ class ViewAnimationViewController: BaseViewController {
       }
       self.view.layoutIfNeeded() // 立即更新布局
     }
-  }
-  
-  override func didSelectRowAt(indexPath: IndexPath) {
-    animationType = BaseAnimationType.init(rawValue: indexPath.item) ?? .positionAndSize
-    setStoryImageView()
   }
   
 }
