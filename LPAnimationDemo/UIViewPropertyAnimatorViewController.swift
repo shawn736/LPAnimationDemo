@@ -12,12 +12,15 @@ import UIKit
 class UIViewPropertyAnimatorViewController: BaseViewController {
   enum BaseAnimationType: Int{
     case basic
+    case abstractAway
+    case running
+    case keyframe
   }
   var animationType: BaseAnimationType = .basic
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["Basic"]
+    configData = ["Basic", "Abstract Animations Away", "Running Animators", "Basic Keyframe"]
   }
   
   override func didSelectRowAt(indexPath: IndexPath) {
@@ -29,6 +32,12 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
     switch animationType {
     case .basic:
       basicAnimation()
+    case .abstractAway:
+      abstractAwayAnimation()
+    case .running:
+      runningAnimation()
+    case .keyframe:
+      keyframeAnimation()
     }
   }
   
@@ -46,6 +55,20 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
       self.storyImageView.transform = .identity
     }
     scale.startAnimation()
+  }
+  
+  func abstractAwayAnimation() {
+    AnimatorFactory.scaleUp(view: storyImageView).startAnimation()
+  }
+  
+  func runningAnimation() {
+    UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: 0.0, options: .curveEaseOut, animations: {
+      self.storyImageView.alpha = 0
+    }, completion: nil)
+  }
+  
+  func keyframeAnimation() {
+    AnimatorFactory.jiggle(view: storyImageView)
   }
   
 }
