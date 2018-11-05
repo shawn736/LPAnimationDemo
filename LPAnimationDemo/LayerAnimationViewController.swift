@@ -352,7 +352,7 @@ class LayerAnimationViewController: BaseViewController {
     let dotOffset: CGFloat = 8.0
     dot.frame = CGRect(x: replicator.frame.size.width - dotLength, y: replicator.position.y, width: dotLength, height: dotLength)
     dot.backgroundColor = UIColor.lightGray.cgColor
-    dot.borderColor = UIColor.red.cgColor
+    dot.borderColor = UIColor.blue.cgColor
     dot.borderWidth = 0.5
     dot.cornerRadius = 1.5
     replicator.addSublayer(dot)

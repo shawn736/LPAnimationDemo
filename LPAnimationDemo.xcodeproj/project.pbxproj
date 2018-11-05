@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		292EDC2121904024005A27D3 /* ViewControllerTransitionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292EDC2021904024005A27D3 /* ViewControllerTransitionsViewController.swift */; };
+		292EDC232190411D005A27D3 /* UIViewPropertyAnimatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292EDC222190411D005A27D3 /* UIViewPropertyAnimatorViewController.swift */; };
+		292EDC252190414F005A27D3 /* TreeDAnimationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292EDC242190414F005A27D3 /* TreeDAnimationsViewController.swift */; };
+		292EDC27219041C1005A27D3 /* FurtherTypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292EDC26219041C1005A27D3 /* FurtherTypesViewController.swift */; };
 		29E9BE15218BEACD00DABFFB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BE14218BEACD00DABFFB /* BaseViewController.swift */; };
 		29E9BE18218BEC9600DABFFB /* ViewAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BE17218BEC9600DABFFB /* ViewAnimationViewController.swift */; };
 		29E9BE85218BF19E00DABFFB /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BE60218BF19E00DABFFB /* LICENSE */; };
@@ -57,6 +60,9 @@
 
 /* Begin PBXFileReference section */
 		292EDC2021904024005A27D3 /* ViewControllerTransitionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTransitionsViewController.swift; sourceTree = "<group>"; };
+		292EDC222190411D005A27D3 /* UIViewPropertyAnimatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPropertyAnimatorViewController.swift; sourceTree = "<group>"; };
+		292EDC242190414F005A27D3 /* TreeDAnimationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDAnimationsViewController.swift; sourceTree = "<group>"; };
+		292EDC26219041C1005A27D3 /* FurtherTypesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurtherTypesViewController.swift; sourceTree = "<group>"; };
 		29E9BE14218BEACD00DABFFB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		29E9BE17218BEC9600DABFFB /* ViewAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnimationViewController.swift; sourceTree = "<group>"; };
 		29E9BE60218BF19E00DABFFB /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -191,6 +197,9 @@
 				29E9BE17218BEC9600DABFFB /* ViewAnimationViewController.swift */,
 				29E9BEAB218C588B00DABFFB /* LayerAnimationViewController.swift */,
 				292EDC2021904024005A27D3 /* ViewControllerTransitionsViewController.swift */,
+				292EDC222190411D005A27D3 /* UIViewPropertyAnimatorViewController.swift */,
+				292EDC242190414F005A27D3 /* TreeDAnimationsViewController.swift */,
+				292EDC26219041C1005A27D3 /* FurtherTypesViewController.swift */,
 				29E9BEA9218BF4F200DABFFB /* mainCell.xib */,
 				29F876A6218BE253005E368B /* AppDelegate.swift */,
 				29F876A8218BE253005E368B /* MainViewController.swift */,
@@ -277,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				292EDC232190411D005A27D3 /* UIViewPropertyAnimatorViewController.swift in Sources */,
 				29E9BE8D218BF19E00DABFFB /* ConstraintInsets.swift in Sources */,
 				29E9BE8A218BF19E00DABFFB /* ConstraintAttributes.swift in Sources */,
 				29E9BE9C218BF19E00DABFFB /* ConstraintMaker.swift in Sources */,
@@ -286,6 +296,7 @@
 				29E9BEAC218C588B00DABFFB /* LayerAnimationViewController.swift in Sources */,
 				29E9BE98218BF19E00DABFFB /* Typealiases.swift in Sources */,
 				29E9BE9F218BF19E00DABFFB /* ConstraintView+Extensions.swift in Sources */,
+				292EDC252190414F005A27D3 /* TreeDAnimationsViewController.swift in Sources */,
 				29E9BE89218BF19E00DABFFB /* ConstraintMakerPriortizable.swift in Sources */,
 				29E9BEA0218BF19E00DABFFB /* ConstraintItem.swift in Sources */,
 				29E9BE9A218BF19E00DABFFB /* ConstraintOffsetTarget.swift in Sources */,
@@ -302,6 +313,7 @@
 				29E9BE90218BF19E00DABFFB /* ConstraintMakerExtendable.swift in Sources */,
 				29E9BEA6218BF19E00DABFFB /* ConstraintLayoutSupportDSL.swift in Sources */,
 				29E9BE15218BEACD00DABFFB /* BaseViewController.swift in Sources */,
+				292EDC27219041C1005A27D3 /* FurtherTypesViewController.swift in Sources */,
 				29E9BE91218BF19E00DABFFB /* ConstraintPriority.swift in Sources */,
 				29E9BE9B218BF19E00DABFFB /* ConstraintMakerEditable.swift in Sources */,
 				29E9BEA7218BF19E00DABFFB /* ConstraintMakerRelatable.swift in Sources */,
