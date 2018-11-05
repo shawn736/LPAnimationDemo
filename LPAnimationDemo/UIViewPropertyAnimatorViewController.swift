@@ -15,12 +15,13 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
     case abstractAway
     case running
     case keyframe
+    case spring
   }
   var animationType: BaseAnimationType = .basic
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["Basic", "Abstract Animations Away", "Running Animators", "Basic Keyframe"]
+    configData = ["Basic", "Abstract Animations Away", "Running Animators", "Basic Keyframe", "Spring Timing Parameters"]
   }
   
   override func didSelectRowAt(indexPath: IndexPath) {
@@ -38,6 +39,8 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
       runningAnimation()
     case .keyframe:
       keyframeAnimation()
+    case .spring:
+      springAnimation()
     }
   }
   
@@ -69,6 +72,15 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
   
   func keyframeAnimation() {
     AnimatorFactory.jiggle(view: storyImageView)
+  }
+  
+  func springAnimation() {
+    let spring = UISpringTimingParameters(mass: 1.0, stiffness: 100.0, damping: 1.0, initialVelocity: CGVector(dx: 0, dy: 0))
+    let animator = UIViewPropertyAnimator(duration: duration, timingParameters: spring)
+    animator.addAnimations {
+      self.storyImageView.frame.origin.y += 100
+    }
+    animator.startAnimation()
   }
   
 }
