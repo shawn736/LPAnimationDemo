@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// CALayer 动画
 class LayerAnimationViewController: BaseViewController {
   
   enum BaseAnimationType: Int{
