@@ -19,14 +19,15 @@ class LayerAnimationViewController: BaseViewController {
     case groupsAndAdvancedTiming
     case repeatAndSpeed
     case spring
-    case keyframeAnimation
+    case keyframe
     case shapeMask
+    case gradient
   }
   var animationType: BaseAnimationType = .positionAndSize
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["Position And Size", "Border", "Shadow", "Contents", "Animations Keys & Delegate", "Groups & Advanced Timing", "Repeat & Speed", "Spring", "Keyframe Animation", "Shape & Mask"]
+    configData = ["Position And Size", "Border", "Shadow", "Contents", "Animations Keys & Delegate", "Groups & Advanced Timing", "Repeat & Speed", "Spring", "Keyframe", "Shape & Mask", "Gradient"]
   }
   
   override func didSelectRowAt(indexPath: IndexPath) {
@@ -52,10 +53,12 @@ class LayerAnimationViewController: BaseViewController {
       repeatAndSpeedAnimation()
     case .spring:
       springAnimation()
-    case .keyframeAnimation:
+    case .keyframe:
       keyframeAnimation()
     case .shapeMask:
       shapeMaskAnimation()
+    case .gradient:
+      gradientAnimation()
     }
   }
   
@@ -242,6 +245,46 @@ class LayerAnimationViewController: BaseViewController {
     maskLayer.add(animator, forKey: nil)
     storyImageLayer.mask = maskLayer
 
+  }
+  
+  func gradientAnimation() {
+    let gradientLayer = CAGradientLayer()
+    gradientLayer.frame = CGRect(
+      x: -storyImageLayer.bounds.size.width,
+      y: storyImageLayer.bounds.origin.y,
+      width: 3 * storyImageLayer.bounds.size.width,
+      height: storyImageLayer.bounds.size.height)
+    gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+    gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+    let colors = [
+      UIColor.yellow.cgColor,
+      UIColor.green.cgColor,
+      UIColor.orange.cgColor,
+      UIColor.cyan.cgColor,
+      UIColor.red.cgColor,
+      UIColor.yellow.cgColor
+    ]
+    gradientLayer.colors = colors
+    let locations: [NSNumber] = [
+      0.0, 0.0, 0.0, 0.0, 0.0, 0.25
+    ]
+    gradientLayer.locations = locations
+    
+    let image = UIImage(named: "balloon")
+    let maskLayer = CALayer()
+    maskLayer.frame = storyImageLayer.bounds.offsetBy(dx: storyImageLayer.bounds.width, dy: 0)
+    maskLayer.backgroundColor = UIColor.clear.cgColor
+    maskLayer.contents = image?.cgImage
+    gradientLayer.mask = maskLayer
+    
+    let gradientAnimation = CABasicAnimation(keyPath: "locations")
+    gradientAnimation.fromValue = [0.0, 0.0, 0.0, 0.0, 0.0, 0.25]
+    gradientAnimation.toValue = [0.65, 0.8, 0.85, 0.9, 0.95, 1.0]
+    gradientAnimation.duration = 3.0
+    gradientAnimation.repeatCount = Float.infinity
+    gradientLayer.add(gradientAnimation, forKey: nil)
+    
+    storyImageLayer.addSublayer(gradientLayer)
   }
   
 }
