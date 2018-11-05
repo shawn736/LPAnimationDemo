@@ -18,12 +18,13 @@ class LayerAnimationViewController: BaseViewController {
     case animationsKeysAndDelegate
     case groupsAndAdvancedTiming
     case repeatAndSpeed
+    case spring
   }
   var animationType: BaseAnimationType = .positionAndSize
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["Position And Size", "Border", "Shadow", "Contents", "Animations Keys & Delegate", "Groups & Advanced Timing", "Repeat & Speed"]
+    configData = ["Position And Size", "Border", "Shadow", "Contents", "Animations Keys & Delegate", "Groups & Advanced Timing", "Repeat & Speed", "Spring"]
   }
   
   override func startAnimation() {
@@ -42,6 +43,8 @@ class LayerAnimationViewController: BaseViewController {
       groupsAndAdvancedTimingAnimation()
     case .repeatAndSpeed:
       repeatAndSpeedAnimation()
+    case .spring:
+      springAnimation()
     }
   }
   
@@ -172,6 +175,26 @@ class LayerAnimationViewController: BaseViewController {
     animator.autoreverses = true
     animator.speed = 5.0 // 几倍速
     storyImageLayer.add(animator, forKey: nil)
+  }
+  
+  /*
+   damping: 阻尼系数，越大停止越快, default: 10
+   mass: 质量，影响运动时的弹簧惯性，质量越大，弹簧拉伸和压缩的幅度越大， default: 1
+   stiffness: 刚度系数，越大，形变产生的力越大，运动越快, default: 100
+   initial velocity: 初始速度， 速率为负，速度方向和运动方向相反, default: 0
+   settlingDuration: 估算时间，弹簧开始到停止的时间，通过上面的参数估算出来
+   */
+  
+  func springAnimation() {
+    let animator = CASpringAnimation(keyPath: "transform.scale")
+    animator.fromValue = 1.25
+    animator.toValue = 1.0
+    animator.damping = 1.0
+//    animator.mass = 1.0
+    animator.stiffness = 100.0
+//    animator.initialVelocity = 0.0
+    animator.duration = animator.settlingDuration
+    storyImageLayer.add(animator, forKey: "scaleAnimator")
   }
   
   override func didSelectRowAt(indexPath: IndexPath) {
