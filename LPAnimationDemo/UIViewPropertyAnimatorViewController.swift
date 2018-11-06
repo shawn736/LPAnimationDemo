@@ -17,14 +17,13 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
     case keyframe
     case spring
     case transition
-    case threeD
     case saveTheDot
   }
   var animationType: BaseAnimationType = .basic
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["Basic", "Abstract Animations Away", "Running Animators", "Basic Keyframe", "Spring Timing Parameters", "Transition", "3D Animation", "Save The Dot"]
+    configData = ["Basic", "Abstract Animations Away", "Running Animators", "Basic Keyframe", "Spring Timing Parameters", "Transition", "Save The Dot"]
   }
   
   override func didSelectRowAt(indexPath: IndexPath) {
@@ -46,8 +45,6 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
       springAnimation()
     case .transition:
       transitionAnimation()
-    case .threeD:
-      threeDAnimation()
     case .saveTheDot:
       saveTheDotAnimation()
     }
@@ -103,28 +100,6 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
     }
     
     animator.addAnimations(transition)
-    animator.startAnimation()
-    animator.pauseAnimation()
-  }
-  
-  /*
-   m34: z轴的透视
-   绕轴旋转的由anchorPoint 和 CATransform3DRotate 共同决定
-   比如anchorPoint= (1.0, 1.0), 沿着y轴旋转180度，那么就在anchorPoint点处，画一条和y轴平行的线，也就是右侧边线，作为翻转用的轴线
-   */
-  func threeDAnimation() {
-    storyImageLayer.backgroundColor = UIColor.blue.cgColor.copy(alpha: 0.8)
-    var identity = CATransform3DIdentity
-    identity.m34 = -1.0/2000 // 其中分母，建议取750~2000，有好的透视效果
-    let originFrame = storyImageLayer.frame
-    storyImageLayer.anchorPoint.x = 1.0 //调整锚点位置
-    storyImageLayer.anchorPoint.y = 1.0
-    storyImageLayer.frame = originFrame //anchorPoint会改变frame，所以需要重新复制originFrame
-    self.storyImageLayer.transform = identity
-    let animator = UIViewPropertyAnimator(duration: duration*4, curve: .linear)
-    animator.addAnimations {
-      self.storyImageLayer.transform = CATransform3DRotate(identity, .pi, 0.0, 1.0, 0.0)
-    }
     animator.startAnimation()
   }
   

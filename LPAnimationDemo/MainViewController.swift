@@ -11,7 +11,7 @@ import UIKit
 class MainViewController: UIViewController {
   
   @IBOutlet weak var mainTableView: UITableView!
-  let configData = ["View Animations", "Layer Animations", "View Controller Transitions", "Animations With UIViewPropertyAnimator", "Further Types Of Animations"]
+  let configData = ["View Animations", "Layer Animations", "View Controller Transitions", "UIViewPropertyAnimator", "Further Types Of Animations"]
 
   override func viewDidLoad() {
     super.viewDidLoad()
