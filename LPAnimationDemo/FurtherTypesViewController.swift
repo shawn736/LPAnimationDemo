@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// 最后一节，其他
+/// 最后一节，其他动画
 class FurtherTypesViewController: BaseViewController {
 
   enum BaseAnimationType: Int{
