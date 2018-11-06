@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+///UIViewPropertyAnimator的例子
 class SaveTheDotViewController: UIViewController {
   // MARK: - enum
   fileprivate enum ScreenEdge: Int {
