@@ -196,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				29E9BE5F218BF19E00DABFFB /* SnapKit */,
+				29F876A8218BE253005E368B /* MainViewController.swift */,
 				29E9BE17218BEC9600DABFFB /* ViewAnimationViewController.swift */,
 				29E9BEAB218C588B00DABFFB /* LayerAnimationViewController.swift */,
 				292EDC2021904024005A27D3 /* ViewControllerTransitionsViewController.swift */,
@@ -203,9 +204,8 @@
 				292EDC2821904FE1005A27D3 /* AnimatorFactory.swift */,
 				292EDC2A21912FF0005A27D3 /* SaveTheDotViewController.swift */,
 				292EDC26219041C1005A27D3 /* FurtherTypesViewController.swift */,
-				29E9BEA9218BF4F200DABFFB /* mainCell.xib */,
 				29F876A6218BE253005E368B /* AppDelegate.swift */,
-				29F876A8218BE253005E368B /* MainViewController.swift */,
+				29E9BEA9218BF4F200DABFFB /* mainCell.xib */,
 				29F876AA218BE253005E368B /* Main.storyboard */,
 				29E9BE14218BEACD00DABFFB /* BaseViewController.swift */,
 				29F876AD218BE256005E368B /* Assets.xcassets */,
