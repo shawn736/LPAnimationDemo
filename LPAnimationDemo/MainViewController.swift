@@ -11,7 +11,7 @@ import UIKit
 class MainViewController: UIViewController {
   
   @IBOutlet weak var mainTableView: UITableView!
-  let configData = ["View Animations", "Layer Animations", "View Controller Transitions", "Animations With UIViewPropertyAnimator", "3D Animations", "Further Types Of Animations"]
+  let configData = ["View Animations", "Layer Animations", "View Controller Transitions", "Animations With UIViewPropertyAnimator", "Further Types Of Animations"]
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -48,9 +48,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
       let vc = UIViewPropertyAnimatorViewController(titleName: configData[indexPath.item])
       navigationController?.pushViewController(vc, animated: true)
     case 4:
-      let vc = TreeDAnimationsViewController(titleName: configData[indexPath.item])
-      navigationController?.pushViewController(vc, animated: true)
-    case 5:
       let vc = FurtherTypesViewController(titleName: configData[indexPath.item])
       navigationController?.pushViewController(vc, animated: true)
     default:

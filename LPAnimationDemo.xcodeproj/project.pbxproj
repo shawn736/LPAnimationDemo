@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		292EDC2121904024005A27D3 /* ViewControllerTransitionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292EDC2021904024005A27D3 /* ViewControllerTransitionsViewController.swift */; };
 		292EDC232190411D005A27D3 /* UIViewPropertyAnimatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292EDC222190411D005A27D3 /* UIViewPropertyAnimatorViewController.swift */; };
-		292EDC252190414F005A27D3 /* TreeDAnimationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292EDC242190414F005A27D3 /* TreeDAnimationsViewController.swift */; };
 		292EDC27219041C1005A27D3 /* FurtherTypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292EDC26219041C1005A27D3 /* FurtherTypesViewController.swift */; };
 		292EDC2921904FE1005A27D3 /* AnimatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292EDC2821904FE1005A27D3 /* AnimatorFactory.swift */; };
 		292EDC2B21912FF0005A27D3 /* SaveTheDotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292EDC2A21912FF0005A27D3 /* SaveTheDotViewController.swift */; };
@@ -63,7 +62,6 @@
 /* Begin PBXFileReference section */
 		292EDC2021904024005A27D3 /* ViewControllerTransitionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTransitionsViewController.swift; sourceTree = "<group>"; };
 		292EDC222190411D005A27D3 /* UIViewPropertyAnimatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPropertyAnimatorViewController.swift; sourceTree = "<group>"; };
-		292EDC242190414F005A27D3 /* TreeDAnimationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDAnimationsViewController.swift; sourceTree = "<group>"; };
 		292EDC26219041C1005A27D3 /* FurtherTypesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurtherTypesViewController.swift; sourceTree = "<group>"; };
 		292EDC2821904FE1005A27D3 /* AnimatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorFactory.swift; sourceTree = "<group>"; };
 		292EDC2A21912FF0005A27D3 /* SaveTheDotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTheDotViewController.swift; sourceTree = "<group>"; };
@@ -203,7 +201,6 @@
 				292EDC2021904024005A27D3 /* ViewControllerTransitionsViewController.swift */,
 				292EDC222190411D005A27D3 /* UIViewPropertyAnimatorViewController.swift */,
 				292EDC2A21912FF0005A27D3 /* SaveTheDotViewController.swift */,
-				292EDC242190414F005A27D3 /* TreeDAnimationsViewController.swift */,
 				292EDC26219041C1005A27D3 /* FurtherTypesViewController.swift */,
 				292EDC2821904FE1005A27D3 /* AnimatorFactory.swift */,
 				29E9BEA9218BF4F200DABFFB /* mainCell.xib */,
@@ -302,7 +299,6 @@
 				29E9BEAC218C588B00DABFFB /* LayerAnimationViewController.swift in Sources */,
 				29E9BE98218BF19E00DABFFB /* Typealiases.swift in Sources */,
 				29E9BE9F218BF19E00DABFFB /* ConstraintView+Extensions.swift in Sources */,
-				292EDC252190414F005A27D3 /* TreeDAnimationsViewController.swift in Sources */,
 				292EDC2921904FE1005A27D3 /* AnimatorFactory.swift in Sources */,
 				29E9BE89218BF19E00DABFFB /* ConstraintMakerPriortizable.swift in Sources */,
 				29E9BEA0218BF19E00DABFFB /* ConstraintItem.swift in Sources */,
