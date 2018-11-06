@@ -56,5 +56,54 @@
             </objects>
             <point key="canvasLocation" x="-529" y="341"/>
         </scene>
+        <!--Save The Dot View Controller-->
+        <scene sceneID="60l-pJ-H9J">
+            <objects>
+                <viewController storyboardIdentifier="SaveTheDotViewController" id="AnP-GL-euR" customClass="SaveTheDotViewController" customModule="LPAnimationDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zos-9R-KCa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kk4-sX-Ro1">
+                                <rect key="frame" x="266" y="20" width="93" height="20"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                <color key="textColor" red="0.70980392160000005" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vt2-BW-zJi">
+                                <rect key="frame" x="126" y="467" width="123" height="20"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                <color key="textColor" red="0.70980392160000005" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHz-tz-AfU">
+                                <rect key="frame" x="16" y="20" width="103" height="20"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                <color key="textColor" red="0.70980392160000005" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.88235294119999996" green="0.90588235289999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="vt2-BW-zJi" firstAttribute="centerX" secondItem="Zos-9R-KCa" secondAttribute="centerX" id="3H5-8F-ZQn"/>
+                            <constraint firstItem="kk4-sX-Ro1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RHz-tz-AfU" secondAttribute="trailing" constant="8" symbolic="YES" id="8hS-Lj-XUn"/>
+                            <constraint firstItem="kk4-sX-Ro1" firstAttribute="trailing" secondItem="Zos-9R-KCa" secondAttribute="trailingMargin" id="D00-Du-X0w"/>
+                            <constraint firstItem="RHz-tz-AfU" firstAttribute="leading" secondItem="Zos-9R-KCa" secondAttribute="leading" constant="16" id="Ebw-3Z-k8S"/>
+                            <constraint firstItem="kk4-sX-Ro1" firstAttribute="top" secondItem="7Z9-v4-mjK" secondAttribute="top" id="JRd-nE-6UX"/>
+                            <constraint firstItem="kk4-sX-Ro1" firstAttribute="baseline" secondItem="RHz-tz-AfU" secondAttribute="baseline" id="aiD-hZ-375"/>
+                            <constraint firstItem="vt2-BW-zJi" firstAttribute="top" secondItem="7Z9-v4-mjK" secondAttribute="top" constant="447" id="xbb-k9-Pk9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7Z9-v4-mjK"/>
+                    </view>
+                    <connections>
+                        <outlet property="bestTimeLabel" destination="RHz-tz-AfU" id="yFr-v5-2WN"/>
+                        <outlet property="clockLabel" destination="kk4-sX-Ro1" id="YxQ-gw-2kq"/>
+                        <outlet property="startLabel" destination="vt2-BW-zJi" id="bDy-uo-vub"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KCV-lC-kE0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1356" y="340"/>
+        </scene>
     </scenes>
 </document>

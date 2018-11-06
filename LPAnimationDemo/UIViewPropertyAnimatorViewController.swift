@@ -17,12 +17,13 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
     case keyframe
     case spring
     case transition
+    case saveTheDot
   }
   var animationType: BaseAnimationType = .basic
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["Basic", "Abstract Animations Away", "Running Animators", "Basic Keyframe", "Spring Timing Parameters", "Transition"]
+    configData = ["Basic", "Abstract Animations Away", "Running Animators", "Basic Keyframe", "Spring Timing Parameters", "Transition", "Save The Dot"]
   }
   
   override func didSelectRowAt(indexPath: IndexPath) {
@@ -44,6 +45,8 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
       springAnimation()
     case .transition:
       transitionAnimation()
+    case .saveTheDot:
+      saveTheDotAnimation()
     }
   }
   
@@ -101,10 +104,12 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
     animator.pauseAnimation()
   }
   
-  /*
-   isRunning: read-only, 当调用startAnimation()后变为true, 如果pause或是stop，或者是自然完成动画，变为false
-   isReversed: default false, 如果是true, 就逆向执行动画
-   state:
-   */
+  func saveTheDotAnimation() {
+    let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+    let vc = storyboard.instantiateViewController(withIdentifier: "SaveTheDotViewController") as! SaveTheDotViewController
+    navigationController?.pushViewController(vc, animated: true)
+  }
+  
+  
   
 }
