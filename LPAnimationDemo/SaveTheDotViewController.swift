@@ -228,6 +228,10 @@ fileprivate extension SaveTheDotViewController {
     return String(format: "%02d:%02d.%03d", minutes, seconds, milliseconds)
   }
   
+  /*
+   presentation： 获取当前显示的layer的copy
+   intersects: 判断两个rect是否有交集，有交集就认为游戏失败gameOver
+   */
   func checkCollision() {
     enemyViews.forEach {
       guard let playerFrame = playerView.layer.presentation()?.frame,
@@ -249,6 +253,7 @@ fileprivate extension SaveTheDotViewController {
   }
   
   func moveEnemies(to touchLocation: CGPoint) {
+    // enumerated 得到索引和值
     for (index, enemyView) in enemyViews.enumerated() {
       let duration = getEnemyDuration(enemyView: enemyView)
       enemyAnimators[index] = UIViewPropertyAnimator(duration: duration,
