@@ -16,12 +16,13 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
     case running
     case keyframe
     case spring
+    case transition
   }
   var animationType: BaseAnimationType = .basic
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["Basic", "Abstract Animations Away", "Running Animators", "Basic Keyframe", "Spring Timing Parameters"]
+    configData = ["Basic", "Abstract Animations Away", "Running Animators", "Basic Keyframe", "Spring Timing Parameters", "Transition"]
   }
   
   override func didSelectRowAt(indexPath: IndexPath) {
@@ -41,6 +42,8 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
       keyframeAnimation()
     case .spring:
       springAnimation()
+    case .transition:
+      transitionAnimation()
     }
   }
   
@@ -80,7 +83,28 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
     animator.addAnimations {
       self.storyImageView.frame.origin.y += 100
     }
+    
+    
     animator.startAnimation()
   }
+  
+  func transitionAnimation() {
+    let animator = UIViewPropertyAnimator(duration: duration*2, curve: .easeOut)
+    let transition = {
+      UIView.transition(with: self.storyImageView, duration: self.duration, options: .transitionCrossDissolve, animations: {
+        self.storyImageView.image = UIImage(named: "plane")
+      }, completion: nil)
+    }
+    
+    animator.addAnimations(transition)
+    animator.startAnimation()
+    animator.pauseAnimation()
+  }
+  
+  /*
+   isRunning: read-only, 当调用startAnimation()后变为true, 如果pause或是stop，或者是自然完成动画，变为false
+   isReversed: default false, 如果是true, 就逆向执行动画
+   state:
+   */
   
 }
