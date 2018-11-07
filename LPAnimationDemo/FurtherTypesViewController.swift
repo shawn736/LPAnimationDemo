@@ -13,19 +13,19 @@ class FurtherTypesViewController: BaseViewController {
 
   enum BaseAnimationType: Int{
     case threeD
-    case emitter
+    case snow
     case imageView
-    
+    case fire
   }
-  var animationType: BaseAnimationType = .emitter
+  var animationType: BaseAnimationType = .threeD
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["3D Animation", "CAEmitterLayer", "UIImageView"]
+    configData = ["3D Animation", "snow", "UIImageView", "Fire"]
   }
   
   override func didSelectRowAt(indexPath: IndexPath) {
-    animationType = BaseAnimationType.init(rawValue: indexPath.item) ?? .emitter
+    animationType = BaseAnimationType.init(rawValue: indexPath.item) ?? .threeD
     setStoryImageView()
   }
   
@@ -33,10 +33,12 @@ class FurtherTypesViewController: BaseViewController {
     switch animationType {
     case .threeD:
       threeDAnimation()
-    case .emitter:
-      emitterAnimation()
+    case .snow:
+      snowAnimation()
     case .imageView:
       imageViewAnimation()
+    case .fire:
+      fireAnimation()
     }
   }
   
@@ -61,7 +63,7 @@ class FurtherTypesViewController: BaseViewController {
     animator.startAnimation()
   }
   
-  func emitterAnimation() {
+  func snowAnimation() {
     view.backgroundColor = .black
     let rect = CGRect(x: 0.0, y: -70.0, width: view.bounds.width, height: 50.0)
     let emitter = CAEmitterLayer()
@@ -152,6 +154,49 @@ class FurtherTypesViewController: BaseViewController {
     storyImageView.animationRepeatCount = 3
     storyImageView.startAnimating()
   
+  }
+  
+  /*
+   renderMode 渲染模式
+   additive: 粒子混合,合并粒子重叠部分的亮度使其更加明亮
+   */
+  
+  func fireAnimation() {
+    view.backgroundColor = .black
+    let emitter = CAEmitterLayer()
+    emitter.frame = storyImageView.layer.bounds
+    emitter.emitterPosition = CGPoint(x: storyImageView.frame.width * 0.5, y: storyImageView.frame.height)
+    emitter.renderMode = .additive
+    storyImageView.layer.addSublayer(emitter)
+    
+    let fire = CAEmitterCell()
+    fire.birthRate = 400
+    fire.lifetime = 2.0
+    fire.lifetimeRange = 1.5
+    fire.color = UIColor(red: 0.8, green: 0.4, blue: 0.2, alpha: 0.1).cgColor
+    fire.contents = UIImage(named: "fire_white")?.cgImage
+    fire.velocity = 80
+    fire.velocityRange = 80
+    fire.emissionLongitude = .pi + .pi/2
+    fire.emissionRange = .pi/2
+    
+    fire.scaleSpeed = 0.3
+    fire.spin = 0.2
+    
+    let smoke = CAEmitterCell()
+    smoke.birthRate = 200
+    smoke.lifetime = 3.0
+    smoke.lifetimeRange = 1.5
+    smoke.color = UIColor(red: 1, green: 1, blue: 1, alpha: 0.05).cgColor
+    smoke.contents = UIImage(named: "smoke_white")?.cgImage
+    
+    smoke.velocity = 125
+    smoke.velocityRange = 100
+    smoke.emissionLongitude = .pi + .pi/2
+    smoke.emissionRange = .pi
+    
+    emitter.emitterCells = [fire, smoke]
+    
   }
 
 }
