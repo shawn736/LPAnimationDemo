@@ -10,18 +10,26 @@ import UIKit
 
 /// 最后一节，其他动画
 class FurtherTypesViewController: BaseViewController {
+  
+  // 在屏幕上实时绘图的参数
+  var lineBeizer: UIBezierPath?
+  var lineStartPoint: CGPoint?
+  var lineMovePoint: CGPoint?
+  var lineShapeLayer: CAShapeLayer?
 
   enum BaseAnimationType: Int{
     case threeD
     case snow
     case imageView
     case fire
+    case drawLineRealTime
+    case drawLogLine
   }
   var animationType: BaseAnimationType = .threeD
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["3D Animation", "snow", "UIImageView", "Fire"]
+    configData = ["3D Animation", "snow", "UIImageView", "Fire", "Draw Line Real Time", "Draw Log Line"]
   }
   
   override func didSelectRowAt(indexPath: IndexPath) {
@@ -39,6 +47,10 @@ class FurtherTypesViewController: BaseViewController {
       imageViewAnimation()
     case .fire:
       fireAnimation()
+    case .drawLineRealTime:
+      drawLineRealTime()
+    case .drawLogLine:
+      drawLogLine()
     }
   }
   
@@ -196,6 +208,52 @@ class FurtherTypesViewController: BaseViewController {
     smoke.emissionRange = .pi
     
     emitter.emitterCells = [fire, smoke]
+    
+  }
+  
+  func initCAShaper() {
+    lineBeizer = UIBezierPath()
+    
+    lineShapeLayer = CAShapeLayer()
+    lineShapeLayer?.frame = CGRect(x: 0, y: 0, width: storyView.frame.width, height: storyView.frame.height)
+    lineShapeLayer?.fillColor = UIColor.clear.cgColor
+    lineShapeLayer?.lineCap = .round
+    lineShapeLayer?.strokeColor = UIColor.cyan.cgColor
+    lineShapeLayer?.lineWidth = 2
+    storyView.layer.addSublayer(lineShapeLayer!)
+  }
+  
+  func drawLineRealTime() {
+    let pan = UIPanGestureRecognizer(target: self, action: #selector(panTouch(pan:)))
+    storyView.addGestureRecognizer(pan)
+    initCAShaper()
+  }
+  
+  func drawLogLine() {
+    initCAShaper()
+    lineShapeLayer?.strokeColor = UIColor.blue.cgColor
+    let startPoint = CGPoint(x: 100, y: 300)
+    lineBeizer?.move(to: startPoint)
+    for i in 1...100 {
+      let x: CGFloat = CGFloat(i)
+      let y: CGFloat = log2(x)  //log2(x) , pow(2.0, (x)) <变化太快，x取值范围要很小的变化>
+      let movePoint = CGPoint(x: startPoint.x + x, y: startPoint.y-y)
+      lineBeizer?.addLine(to: movePoint)
+    }
+    lineShapeLayer?.path = lineBeizer?.cgPath
+  }
+  
+  @objc func panTouch(pan: UIPanGestureRecognizer) {
+    lineStartPoint = pan.location(in: storyView)
+    if pan.state == .began {
+      lineBeizer?.move(to: lineStartPoint!)
+    }
+    
+    if pan.state == .changed {
+      lineMovePoint = pan.location(in: storyView)
+      lineBeizer?.addLine(to: lineMovePoint!)
+      lineShapeLayer?.path = lineBeizer?.cgPath
+    }
     
   }
 
