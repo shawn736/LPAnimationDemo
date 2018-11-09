@@ -56,11 +56,30 @@ class ZeroWorldViewController: UIViewController {
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    // First touch to start the game
+    // First touch to start the collect
     if zeroWorldState == .ready {
       startCollect()
     }
     
+    if let touchLocation = event?.allTouches?.first?.location(in: view) {
+      // Move the collector to the new position
+      moveCollector(to: touchLocation)
+      
+      // Move all enemies to the new position to trace the collector
+      moveDots(to: touchLocation)
+    }
+  }
+  
+  override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    if let touchLocation = event?.allTouches?.first?.location(in: view) {
+      // Move the collector to the new position
+      moveCollector(to: touchLocation)
+      
+      // Move all enemies to the new position to trace the collector
+//      moveDots(to: touchLocation)
+    }
+  }
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     if let touchLocation = event?.allTouches?.first?.location(in: view) {
       // Move the collector to the new position
       moveCollector(to: touchLocation)
@@ -125,10 +144,8 @@ class ZeroWorldViewController: UIViewController {
 
 fileprivate extension ZeroWorldViewController {
   func setupCollectorView() {
-    collectorView.bounds.size = CGSize(width: radius * 2, height: radius * 2)
-    collectorView.layer.cornerRadius = radius
+    resetCollectorViewSize()
     collectorView.backgroundColor = #colorLiteral(red: 0.7098039216, green: 0.4549019608, blue: 0.9607843137, alpha: 1)
-    
     view.addSubview(collectorView)
   }
   
@@ -167,6 +184,7 @@ fileprivate extension ZeroWorldViewController {
   }
   
   func collectOver() {
+    resetCollectorViewSize()
     stopCollect()
     displayCollectOverAlert()
   }
@@ -176,6 +194,11 @@ fileprivate extension ZeroWorldViewController {
     stopDisplayLink()
     stopAnimators()
     zeroWorldState = .collectOver
+  }
+  
+  func resetCollectorViewSize() {
+    collectorView.bounds.size = CGSize(width: radius * 2, height: radius * 2)
+    collectorView.layer.cornerRadius = radius
   }
   
   func prepareCollect() {
@@ -230,17 +253,41 @@ fileprivate extension ZeroWorldViewController {
   
   /*
    presentation： 获取当前显示的layer的copy
-   intersects: 判断两个rect是否有交集，有交集就认为游戏失败collectOver
+   intersects: 判断两个rect是否有交集，有交集就增大collectorView的大小
    */
   func checkCollision() {
     dotViews.forEach {
-      guard let collectorFrame = collectorView.layer.presentation()?.frame,
-        let dotFrame = $0.layer.presentation()?.frame,
-        collectorFrame.intersects(dotFrame) else {
-          return
+      if $0.isHidden == false {
+        guard let collectorFrame = collectorView.layer.presentation()?.frame,
+          let dotFrame = $0.layer.presentation()?.frame,
+          collectorFrame.intersects(dotFrame) else {
+            return
+        }
+        $0.isHidden = true
+        increaseCollectorSize(dt: 1.0)
       }
-      collectOver()
     }
+  }
+  
+  
+  func increaseCollectorSize(dt: Double) {
+    UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.1, initialSpringVelocity: 0, options: [], animations: {
+      self.collectorView.frame.size.width += CGFloat(1.5*dt)
+      self.collectorView.frame.size.height += CGFloat(1.5*dt)
+      self.collectorView.layer.cornerRadius = self.collectorView.frame.size.width * 0.5
+    }) { (flag) in
+//      if self.collectorView.frame.size.width > 100.0 {
+//        self.collectOver()
+//      }
+    }
+    
+//    collectorView.frame.size.width += CGFloat(1.25*dt)
+//    collectorView.frame.size.height += CGFloat(1.25*dt)
+//    collectorView.layer.cornerRadius = collectorView.frame.size.width * 0.5
+//    if collectorView.frame.size.width > 100.0 {
+//      collectOver()
+//    }
+    
   }
   
   func moveCollector(to touchLocation: CGPoint) {
