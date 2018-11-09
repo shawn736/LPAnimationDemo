@@ -105,5 +105,54 @@
             </objects>
             <point key="canvasLocation" x="1356" y="340"/>
         </scene>
+        <!--Zero World View Controller-->
+        <scene sceneID="qdV-8N-RIC">
+            <objects>
+                <viewController storyboardIdentifier="ZeroWorldViewController" id="3Xw-bQ-RQW" customClass="ZeroWorldViewController" customModule="LPAnimationDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dVc-wX-aWD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raw-CL-F7g">
+                                <rect key="frame" x="266" y="20" width="93" height="20"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                <color key="textColor" red="0.70980392160000005" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H0W-tX-fzP">
+                                <rect key="frame" x="126" y="467" width="123" height="20"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                <color key="textColor" red="0.70980392160000005" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wHV-Uf-kCR">
+                                <rect key="frame" x="16" y="20" width="103" height="20"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                <color key="textColor" red="0.70980392160000005" green="0.4549019608" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.88235294119999996" green="0.90588235289999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="H0W-tX-fzP" firstAttribute="top" secondItem="wpg-ky-9BR" secondAttribute="top" constant="447" id="2HR-79-bdt"/>
+                            <constraint firstItem="raw-CL-F7g" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wHV-Uf-kCR" secondAttribute="trailing" constant="8" symbolic="YES" id="3bS-XO-HDV"/>
+                            <constraint firstItem="wHV-Uf-kCR" firstAttribute="leading" secondItem="dVc-wX-aWD" secondAttribute="leading" constant="16" id="AWC-Ra-JCf"/>
+                            <constraint firstItem="raw-CL-F7g" firstAttribute="baseline" secondItem="wHV-Uf-kCR" secondAttribute="baseline" id="K8K-EY-UEW"/>
+                            <constraint firstItem="H0W-tX-fzP" firstAttribute="centerX" secondItem="dVc-wX-aWD" secondAttribute="centerX" id="UsQ-Og-BGt"/>
+                            <constraint firstItem="raw-CL-F7g" firstAttribute="top" secondItem="wpg-ky-9BR" secondAttribute="top" id="cTs-di-yy8"/>
+                            <constraint firstItem="raw-CL-F7g" firstAttribute="trailing" secondItem="dVc-wX-aWD" secondAttribute="trailingMargin" id="r7O-rw-S0T"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wpg-ky-9BR"/>
+                    </view>
+                    <connections>
+                        <outlet property="bestTimeLabel" destination="wHV-Uf-kCR" id="xES-Hg-h6O"/>
+                        <outlet property="clockLabel" destination="raw-CL-F7g" id="86C-uk-Dm1"/>
+                        <outlet property="startLabel" destination="H0W-tX-fzP" id="wd6-tV-9vq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kXR-a1-3hF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1356" y="340"/>
+        </scene>
     </scenes>
 </document>

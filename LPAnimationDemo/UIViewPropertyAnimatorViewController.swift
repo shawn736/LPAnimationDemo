@@ -18,12 +18,13 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
     case spring
     case transition
     case saveTheDot
+    case zeroWorld
   }
   var animationType: BaseAnimationType = .basic
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["Basic", "Abstract Animations Away", "Running Animators", "Basic Keyframe", "Spring Timing Parameters", "Transition", "Save The Dot"]
+    configData = ["Basic", "Abstract Animations Away", "Running Animators", "Basic Keyframe", "Spring Timing Parameters", "Transition", "Save The Dot", "Zero World"]
   }
   
   override func didSelectRowAt(indexPath: IndexPath) {
@@ -47,6 +48,8 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
       transitionAnimation()
     case .saveTheDot:
       saveTheDotAnimation()
+    case .zeroWorld:
+      zeroWorldAnimation()
     }
   }
   
@@ -106,6 +109,12 @@ class UIViewPropertyAnimatorViewController: BaseViewController {
   func saveTheDotAnimation() {
     let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
     let vc = storyboard.instantiateViewController(withIdentifier: "SaveTheDotViewController") as! SaveTheDotViewController
+    navigationController?.pushViewController(vc, animated: true)
+  }
+  
+  func zeroWorldAnimation() {
+    let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+    let vc = storyboard.instantiateViewController(withIdentifier: "ZeroWorldViewController") as! ZeroWorldViewController
     navigationController?.pushViewController(vc, animated: true)
   }
   

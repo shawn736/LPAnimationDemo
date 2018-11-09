@@ -1,15 +1,14 @@
 //
-//  SaveTheDotViewController.swift
+//  FirstWorldViewController.swift
 //  LPAnimationDemo
 //
-//  Created by Shawn on 2018/11/6.
+//  Created by Shawn on 2018/11/9.
 //  Copyright © 2018 fcs. All rights reserved.
 //
 
-
 import UIKit
 ///UIViewPropertyAnimator的例子
-class SaveTheDotViewController: UIViewController {
+class ZeroWorldViewController: UIViewController {
   // MARK: - enum
   fileprivate enum ScreenEdge: Int {
     case top = 0
@@ -124,7 +123,7 @@ class SaveTheDotViewController: UIViewController {
   }
 }
 
-fileprivate extension SaveTheDotViewController {
+fileprivate extension ZeroWorldViewController {
   func setupPlayerView() {
     playerView.bounds.size = CGSize(width: radius * 2, height: radius * 2)
     playerView.layer.cornerRadius = radius
@@ -322,5 +321,6 @@ fileprivate extension SaveTheDotViewController {
       self.bestTimeLabel.text = "Best Time: \(time)"
     }
   }
-
+  
 }
+
