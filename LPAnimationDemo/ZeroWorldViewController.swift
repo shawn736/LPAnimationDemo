@@ -17,31 +17,31 @@ class ZeroWorldViewController: UIViewController {
     case left = 3
   }
   
-  fileprivate enum GameState {
+  fileprivate enum ZeroWorldState {
     case ready
     case playing
-    case gameOver
+    case collectOver
   }
   
   // MARK: - Constants
   fileprivate let radius: CGFloat = 10
-  fileprivate let playerAnimationDuration = 5.0
-  fileprivate let enemySpeed: CGFloat = 60 // points per second
+  fileprivate let collectorAnimationDuration = 5.0
+  fileprivate let dotSpeed: CGFloat = 60 // points per second
   fileprivate let colors = [#colorLiteral(red: 0.08235294118, green: 0.6980392157, blue: 0.5411764706, alpha: 1), #colorLiteral(red: 0.07058823529, green: 0.5725490196, blue: 0.4470588235, alpha: 1), #colorLiteral(red: 0.9333333333, green: 0.7333333333, blue: 0, alpha: 1), #colorLiteral(red: 0.9411764706, green: 0.5450980392, blue: 0, alpha: 1), #colorLiteral(red: 0.1411764706, green: 0.7803921569, blue: 0.3529411765, alpha: 1), #colorLiteral(red: 0.1176470588, green: 0.6431372549, blue: 0.2941176471, alpha: 1), #colorLiteral(red: 0.8784313725, green: 0.4156862745, blue: 0.03921568627, alpha: 1), #colorLiteral(red: 0.7882352941, green: 0.2470588235, blue: 0, alpha: 1), #colorLiteral(red: 0.1490196078, green: 0.5098039216, blue: 0.8352941176, alpha: 1), #colorLiteral(red: 0.1137254902, green: 0.4156862745, blue: 0.6784313725, alpha: 1), #colorLiteral(red: 0.8823529412, green: 0.2, blue: 0.1607843137, alpha: 1), #colorLiteral(red: 0.7019607843, green: 0.1411764706, blue: 0.1098039216, alpha: 1), #colorLiteral(red: 0.537254902, green: 0.2352941176, blue: 0.662745098, alpha: 1), #colorLiteral(red: 0.4823529412, green: 0.1490196078, blue: 0.6235294118, alpha: 1), #colorLiteral(red: 0.6862745098, green: 0.7137254902, blue: 0.7333333333, alpha: 1), #colorLiteral(red: 0.1529411765, green: 0.2196078431, blue: 0.2980392157, alpha: 1), #colorLiteral(red: 0.1294117647, green: 0.1843137255, blue: 0.2470588235, alpha: 1), #colorLiteral(red: 0.5137254902, green: 0.5843137255, blue: 0.5843137255, alpha: 1), #colorLiteral(red: 0.4235294118, green: 0.4745098039, blue: 0.4784313725, alpha: 1)]
   
   // MARK: - fileprivate
-  fileprivate var playerView = UIView(frame: .zero)
-  fileprivate var playerAnimator: UIViewPropertyAnimator?
+  fileprivate var collectorView = UIView(frame: .zero)
+  fileprivate var collectorAnimator: UIViewPropertyAnimator?
   
-  fileprivate var enemyViews = [UIView]()
-  fileprivate var enemyAnimators = [UIViewPropertyAnimator]()
-  fileprivate var enemyTimer: Timer?
+  fileprivate var dotViews = [UIView]()
+  fileprivate var dotAnimators = [UIViewPropertyAnimator]()
+  fileprivate var dotTimer: Timer?
   
   fileprivate var displayLink: CADisplayLink?
   fileprivate var beginTimestamp: TimeInterval = 0
   fileprivate var elapsedTime: TimeInterval = 0
   
-  fileprivate var gameState = GameState.ready
+  fileprivate var zeroWorldState: ZeroWorldState = .ready
   
   // MARK: - IBOutlets
   @IBOutlet weak var clockLabel: UILabel!
@@ -51,27 +51,27 @@ class ZeroWorldViewController: UIViewController {
   // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupPlayerView()
-    prepareGame()
+    setupCollectorView()
+    prepareCollect()
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     // First touch to start the game
-    if gameState == .ready {
-      startGame()
+    if zeroWorldState == .ready {
+      startCollect()
     }
     
     if let touchLocation = event?.allTouches?.first?.location(in: view) {
-      // Move the player to the new position
-      movePlayer(to: touchLocation)
+      // Move the collector to the new position
+      moveCollector(to: touchLocation)
       
-      // Move all enemies to the new position to trace the player
-      moveEnemies(to: touchLocation)
+      // Move all enemies to the new position to trace the collector
+      moveDots(to: touchLocation)
     }
   }
   
   // MARK: - Selectors
-  @objc func generateEnemy(timer: Timer) {
+  @objc func generateDot(timer: Timer) {
     // Generate an enemy with random position
     let screenEdge = ScreenEdge.init(rawValue: Int(arc4random_uniform(4)))
     let screenBounds = UIScreen.main.bounds
@@ -85,36 +85,36 @@ class ZeroWorldViewController: UIViewController {
     }
     
     // Add the new enemy to the view
-    let enemyView = UIView(frame: .zero)
-    enemyView.bounds.size = CGSize(width: radius, height: radius)
-    enemyView.backgroundColor = getRandomColor()
+    let dotView = UIView(frame: .zero)
+    dotView.bounds.size = CGSize(width: radius, height: radius)
+    dotView.backgroundColor = getRandomColor()
     
     switch screenEdge! {
     case .left:
-      enemyView.center = CGPoint(x: 0, y: position)
+      dotView.center = CGPoint(x: 0, y: position)
     case .right:
-      enemyView.center = CGPoint(x: screenBounds.width, y: position)
+      dotView.center = CGPoint(x: screenBounds.width, y: position)
     case .top:
-      enemyView.center = CGPoint(x: position, y: screenBounds.height)
+      dotView.center = CGPoint(x: position, y: screenBounds.height)
     case .bottom:
-      enemyView.center = CGPoint(x: position, y: 0)
+      dotView.center = CGPoint(x: position, y: 0)
     }
     
-    view.addSubview(enemyView)
+    view.addSubview(dotView)
     
     // Start animation
-    let duration = getEnemyDuration(enemyView: enemyView)
-    let enemyAnimator = UIViewPropertyAnimator(duration: duration,
+    let duration = getDotDuration(dotView: dotView)
+    let dotAnimator = UIViewPropertyAnimator(duration: duration,
                                                curve: .linear,
                                                animations: { [weak self] in
                                                 if let strongSelf = self {
-                                                  enemyView.center = strongSelf.playerView.center
+                                                  dotView.center = strongSelf.collectorView.center
                                                 }
       }
     )
-    enemyAnimator.startAnimation()
-    enemyAnimators.append(enemyAnimator)
-    enemyViews.append(enemyView)
+    dotAnimator.startAnimation()
+    dotAnimators.append(dotAnimator)
+    dotViews.append(dotView)
   }
   
   @objc func tick(sender: CADisplayLink) {
@@ -124,24 +124,24 @@ class ZeroWorldViewController: UIViewController {
 }
 
 fileprivate extension ZeroWorldViewController {
-  func setupPlayerView() {
-    playerView.bounds.size = CGSize(width: radius * 2, height: radius * 2)
-    playerView.layer.cornerRadius = radius
-    playerView.backgroundColor = #colorLiteral(red: 0.7098039216, green: 0.4549019608, blue: 0.9607843137, alpha: 1)
+  func setupCollectorView() {
+    collectorView.bounds.size = CGSize(width: radius * 2, height: radius * 2)
+    collectorView.layer.cornerRadius = radius
+    collectorView.backgroundColor = #colorLiteral(red: 0.7098039216, green: 0.4549019608, blue: 0.9607843137, alpha: 1)
     
-    view.addSubview(playerView)
+    view.addSubview(collectorView)
   }
   
-  func startEnemyTimer() {
-    enemyTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(generateEnemy(timer:)), userInfo: nil, repeats: true)
+  func startDotTimer() {
+    dotTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(generateDot(timer:)), userInfo: nil, repeats: true)
   }
   
-  func stopEnemyTimer() {
-    guard let enemyTimer = enemyTimer,
-      enemyTimer.isValid else {
+  func stopDotTimer() {
+    guard let dotTimer = dotTimer,
+      dotTimer.isValid else {
         return
     }
-    enemyTimer.invalidate()
+    dotTimer.invalidate()
   }
   
   func startDisplayLink() {
@@ -160,56 +160,56 @@ fileprivate extension ZeroWorldViewController {
     return colors[Int(index)]
   }
   
-  func getEnemyDuration(enemyView: UIView) -> TimeInterval {
-    let dx = playerView.center.x - enemyView.center.x
-    let dy = playerView.center.y - enemyView.center.y
-    return TimeInterval(sqrt(dx * dx + dy * dy) / enemySpeed)
+  func getDotDuration(dotView: UIView) -> TimeInterval {
+    let dx = collectorView.center.x - dotView.center.x
+    let dy = collectorView.center.y - dotView.center.y
+    return TimeInterval(sqrt(dx * dx + dy * dy) / dotSpeed)
   }
   
-  func gameOver() {
-    stopGame()
-    displayGameOverAlert()
+  func collectOver() {
+    stopCollect()
+    displayCollectOverAlert()
   }
   
-  func stopGame() {
-    stopEnemyTimer()
+  func stopCollect() {
+    stopDotTimer()
     stopDisplayLink()
     stopAnimators()
-    gameState = .gameOver
+    zeroWorldState = .collectOver
   }
   
-  func prepareGame() {
+  func prepareCollect() {
     getBestTime()
     removeEnemies()
-    centerPlayerView()
-    popPlayerView()
+    centerCollectorView()
+    popCollectorView()
     startLabel.isHidden = false
     clockLabel.text = "00:00.000"
-    gameState = .ready
+    zeroWorldState = .ready
   }
   
-  func startGame() {
-    startEnemyTimer()
+  func startCollect() {
+    startDotTimer()
     startDisplayLink()
     startLabel.isHidden = true
     beginTimestamp = 0
-    gameState = .playing
+    zeroWorldState = .playing
   }
   
   func removeEnemies() {
-    enemyViews.forEach {
+    dotViews.forEach {
       $0.removeFromSuperview()
     }
-    enemyViews = []
+    dotViews = []
   }
   
   func stopAnimators() {
-    playerAnimator?.stopAnimation(true)
-    playerAnimator = nil
-    enemyAnimators.forEach {
+    collectorAnimator?.stopAnimation(true)
+    collectorAnimator = nil
+    dotAnimators.forEach {
       $0.stopAnimation(true)
     }
-    enemyAnimators = []
+    dotAnimators = []
   }
   
   func updateCountUpTimer(timestamp: TimeInterval) {
@@ -230,54 +230,61 @@ fileprivate extension ZeroWorldViewController {
   
   /*
    presentation： 获取当前显示的layer的copy
-   intersects: 判断两个rect是否有交集，有交集就认为游戏失败gameOver
+   intersects: 判断两个rect是否有交集，有交集就认为游戏失败collectOver
    */
   func checkCollision() {
-    enemyViews.forEach {
-      guard let playerFrame = playerView.layer.presentation()?.frame,
-        let enemyFrame = $0.layer.presentation()?.frame,
-        playerFrame.intersects(enemyFrame) else {
+    dotViews.forEach {
+      guard let collectorFrame = collectorView.layer.presentation()?.frame,
+        let dotFrame = $0.layer.presentation()?.frame,
+        collectorFrame.intersects(dotFrame) else {
           return
       }
-      gameOver()
+      collectOver()
     }
   }
   
-  func movePlayer(to touchLocation: CGPoint) {
-    playerAnimator = UIViewPropertyAnimator(duration: playerAnimationDuration,
+  func moveCollector(to touchLocation: CGPoint) {
+    collectorAnimator = UIViewPropertyAnimator(duration: collectorAnimationDuration,
                                             dampingRatio: 0.5,
                                             animations: { [weak self] in
-                                              self?.playerView.center = touchLocation
+                                              self?.collectorView.center = touchLocation
     })
-    playerAnimator?.startAnimation()
+    collectorAnimator?.startAnimation()
   }
   
-  func moveEnemies(to touchLocation: CGPoint) {
+  func moveDots(to touchLocation: CGPoint) {
     // enumerated 得到索引和值
-    for (index, enemyView) in enemyViews.enumerated() {
-      let duration = getEnemyDuration(enemyView: enemyView)
-      enemyAnimators[index] = UIViewPropertyAnimator(duration: duration,
+    for (index, enemyView) in dotViews.enumerated() {
+      let duration = getDotDuration(dotView: enemyView)
+      dotAnimators[index] = UIViewPropertyAnimator(duration: duration,
                                                      curve: .linear,
                                                      animations: {
                                                       enemyView.center = touchLocation
       })
-      enemyAnimators[index].startAnimation()
+      dotAnimators[index].startAnimation()
     }
   }
   
-  func displayGameOverAlert() {
-    let (title, message) = getGameOverTitleAndMessage()
-    let alert = UIAlertController(title: "Game Over", message: message, preferredStyle: .alert)
+  func displayCollectOverAlert() {
+    let (title, message) = getCollectOverTitleAndMessage()
+    let alert = UIAlertController(title: "Collect Over", message: message, preferredStyle: .alert)
     let action = UIAlertAction(title: title, style: .default,
                                handler: { _ in
-                                self.prepareGame()
+                                self.prepareCollect()
     }
     )
     alert.addAction(action)
-    self.present(alert, animated: true, completion: nil)
+    if let presented = self.presentedViewController {
+      presented.removeFromParent()
+    }
+    
+    if presentedViewController == nil {
+      self.present(alert, animated: true, completion: nil)
+    }
+
   }
   
-  func getGameOverTitleAndMessage() -> (String, String) {
+  func getCollectOverTitleAndMessage() -> (String, String) {
     let elapsedSeconds = Int(elapsedTime) % 60
     setBestTime(with: format(timeInterval: elapsedTime))
     
@@ -286,17 +293,17 @@ fileprivate extension ZeroWorldViewController {
     case 10..<30: return ("Another go 😉", "No bad, you are getting there 😁")
     case 30..<60: return ("Play again 😉", "Very good 👍")
     default:
-      return ("Off cause 😚", "Legend, olympic player, go 🇧🇷")
+      return ("Off cause 😚", "Legend, olympic collector, go 🇧🇷")
     }
   }
   
-  func centerPlayerView() {
-    // Place the player in the center of the screen.
-    playerView.center = view.center
+  func centerCollectorView() {
+    // Place the collector in the center of the screen.
+    collectorView.center = view.center
   }
   
   // Copy from IBAnimatable
-  func popPlayerView() {
+  func popCollectorView() {
     let animation = CAKeyframeAnimation(keyPath: "transform.scale")
     animation.values = [0, 0.2, -0.2, 0.2, 0]
     animation.keyTimes = [0, 0.2, 0.4, 0.6, 0.8, 1]
@@ -305,7 +312,7 @@ fileprivate extension ZeroWorldViewController {
     animation.isAdditive = true
     animation.repeatCount = 1
     animation.beginTime = CACurrentMediaTime()
-    playerView.layer.add(animation, forKey: "pop")
+    collectorView.layer.add(animation, forKey: "pop")
   }
   
   func setBestTime(with time:String){
