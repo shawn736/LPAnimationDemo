@@ -24,12 +24,13 @@ class FurtherTypesViewController: BaseViewController {
     case fire
     case drawLineRealTime
     case drawLogLine
+    case pauseAndResume
   }
   var animationType: BaseAnimationType = .threeD
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configData = ["3D Animation", "snow", "UIImageView", "Fire", "Draw Line Real Time", "Draw Log Line"]
+    configData = ["3D Animation", "snow", "UIImageView", "Fire", "Draw Line Real Time", "Draw Log Line", "PauseAndResume"]
   }
   
   override func didSelectRowAt(indexPath: IndexPath) {
@@ -51,6 +52,8 @@ class FurtherTypesViewController: BaseViewController {
       drawLineRealTime()
     case .drawLogLine:
       drawLogLine()
+    case .pauseAndResume:
+      pauseAndResumeLayerAnimation()
     }
   }
   
@@ -256,5 +259,59 @@ class FurtherTypesViewController: BaseViewController {
     }
     
   }
+  
+  var isPause: Bool = false
+  let button = UIButton()
+  func pauseAndResumeLayerAnimation() {
+    button.frame = CGRect(x: 100, y: 300, width: 50, height: 50)
+    button.backgroundColor = .red
+    button.setTitle("pause", for: .normal)
+    button.addTarget(self, action: #selector(pauseOrResume), for: .touchUpInside)
+    storyView.addSubview(button)
+    
+    let animation = CABasicAnimation(keyPath: "bounds")
+    animation.toValue = CGRect(x: storyImageLayer.frame.minX, y: storyImageLayer.frame.minY, width: storyImageLayer.frame.width * 4.0, height: storyImageLayer.frame.height * 4.0)
+    animation.duration = 10.0
+    animation.delegate = self
+//    animation.isRemovedOnCompletion = false //添加这个就可以在按home返回时继续动画，不过还是建议不要用这个字段
+    //按home的动画暂停问题，是建议添加监听UIApplicationDidBecomeActiveNotification，重新开始动画
+    NotificationCenter.default.addObserver(self, selector: #selector(enterFore(not:)), name: UIApplication.didBecomeActiveNotification, object: self)
+    storyImageLayer.add(animation, forKey: "PauseAndResume")
+ 
+  }
+  
+  @objc func enterFore(not: NSNotification) {
+    pauseAndResumeLayerAnimation()
+  }
 
+  @objc func pauseOrResume() {
+    if isPause {
+      // 恢复
+      let pausedTime = storyImageLayer.timeOffset
+      storyImageLayer.speed = 1.0
+      storyImageLayer.timeOffset = 0.0
+      storyImageLayer.beginTime = 0.0
+      let timeSinePause = storyImageLayer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
+      storyImageLayer.beginTime = timeSinePause
+      button.setTitle("pause", for: .normal)
+    } else {
+      // 暂停
+      let pausedTime = storyImageLayer.convertTime(CACurrentMediaTime(), from: nil)
+      storyImageLayer.speed = 0.0
+      storyImageLayer.timeOffset = pausedTime
+       button.setTitle("resume", for: .normal)
+    }
+    isPause = !isPause
+  }
+
+}
+
+extension FurtherTypesViewController: CAAnimationDelegate {
+  func animationDidStart(_ anim: CAAnimation) {
+    
+  }
+  
+  func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+    print("animation: \(anim), flag: \(flag)")
+  }
 }
