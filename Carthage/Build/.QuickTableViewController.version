@@ -8,14 +8,14 @@
   "tvOS" : [
     {
       "name" : "QuickTableViewController",
-      "hash" : "1a3d42434cceb42bc8bc614e26369706ddea6ba3563c84e5370435a6f52e20a6"
+      "hash" : "94d144bbd70f51863f9ebaa90b7a465b85c08a99bd7562a830a5e6c6abf89723"
     }
   ],
   "commitish" : "v1.0.0",
   "iOS" : [
     {
       "name" : "QuickTableViewController",
-      "hash" : "6025895cc778ed04f0719c29e9abc599b855ecbb59bcef0f65a4830a69e5f6a6"
+      "hash" : "28d8395c6dc8a94406769dec9a8b26ec9f9147f8ce01ac2d15598f953c7d1176"
     }
   ]
 }

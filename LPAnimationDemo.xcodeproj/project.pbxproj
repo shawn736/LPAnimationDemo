@@ -56,6 +56,7 @@
 		29E9BEAA218BF4F200DABFFB /* mainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BEA9218BF4F200DABFFB /* mainCell.xib */; };
 		29E9BEAC218C588B00DABFFB /* LayerAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BEAB218C588B00DABFFB /* LayerAnimationViewController.swift */; };
 		29ED6ED221A3EC8C00686FFE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29ED6ED121A3EC8C00686FFE /* MessageUI.framework */; };
+		29ED6ED421A4093D00686FFE /* UIDeviceComplete.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29ED6ED321A4093C00686FFE /* UIDeviceComplete.framework */; };
 		29F876A7218BE253005E368B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F876A6218BE253005E368B /* AppDelegate.swift */; };
 		29F876A9218BE253005E368B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F876A8218BE253005E368B /* MainViewController.swift */; };
 		29F876AC218BE253005E368B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29F876AA218BE253005E368B /* Main.storyboard */; };
@@ -113,6 +114,7 @@
 		29E9BEA9218BF4F200DABFFB /* mainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = mainCell.xib; sourceTree = "<group>"; };
 		29E9BEAB218C588B00DABFFB /* LayerAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerAnimationViewController.swift; sourceTree = "<group>"; };
 		29ED6ED121A3EC8C00686FFE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		29ED6ED321A4093C00686FFE /* UIDeviceComplete.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIDeviceComplete.framework; path = Carthage/Build/iOS/UIDeviceComplete.framework; sourceTree = SOURCE_ROOT; };
 		29F876A3218BE253005E368B /* LPAnimationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LPAnimationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29F876A6218BE253005E368B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29F876A8218BE253005E368B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29ED6ED221A3EC8C00686FFE /* MessageUI.framework in Frameworks */,
+				29ED6ED421A4093D00686FFE /* UIDeviceComplete.framework in Frameworks */,
 				2961B0E221A3DCFC005FE824 /* TableViewDragger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,6 +217,7 @@
 		29F876A5218BE253005E368B /* LPAnimationDemo */ = {
 			isa = PBXGroup;
 			children = (
+				29ED6ED321A4093C00686FFE /* UIDeviceComplete.framework */,
 				2961B0E121A3DCFC005FE824 /* TableViewDragger.framework */,
 				29E9BE5F218BF19E00DABFFB /* SnapKit */,
 				29F876A8218BE253005E368B /* MainViewController.swift */,
@@ -317,12 +321,14 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/TableViewDragger.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/UIDeviceComplete.framework",
 			);
 			name = Carthage;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TableViewDragger.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/UIDeviceComplete.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

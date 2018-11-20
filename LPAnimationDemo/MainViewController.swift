@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import UIDeviceComplete
 
 class MainViewController: UIViewController {
   
@@ -79,7 +80,8 @@ extension MainViewController: MFMailComposeViewControllerDelegate {
     //设置邮件地址、主题及正文
     mailComposeVC.setToRecipients(["<你的邮箱地址>"])
     mailComposeVC.setSubject("<邮件主题>")
-    mailComposeVC.setMessageBody("<邮件正文>", isHTML: false)
+    
+    mailComposeVC.setMessageBody("<邮件正文\n\n\n\n<\(UIDevice.current.dc.commonDeviceName)>", isHTML: false) //正文里 可以加上设备信息，系统版本， app版本信息。
     
     return mailComposeVC
     
