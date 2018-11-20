@@ -55,6 +55,7 @@
 		29E9BEA8218BF19E00DABFFB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BE84218BF19E00DABFFB /* README.md */; };
 		29E9BEAA218BF4F200DABFFB /* mainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BEA9218BF4F200DABFFB /* mainCell.xib */; };
 		29E9BEAC218C588B00DABFFB /* LayerAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BEAB218C588B00DABFFB /* LayerAnimationViewController.swift */; };
+		29ED6ED221A3EC8C00686FFE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29ED6ED121A3EC8C00686FFE /* MessageUI.framework */; };
 		29F876A7218BE253005E368B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F876A6218BE253005E368B /* AppDelegate.swift */; };
 		29F876A9218BE253005E368B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F876A8218BE253005E368B /* MainViewController.swift */; };
 		29F876AC218BE253005E368B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29F876AA218BE253005E368B /* Main.storyboard */; };
@@ -111,6 +112,7 @@
 		29E9BE84218BF19E00DABFFB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		29E9BEA9218BF4F200DABFFB /* mainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = mainCell.xib; sourceTree = "<group>"; };
 		29E9BEAB218C588B00DABFFB /* LayerAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerAnimationViewController.swift; sourceTree = "<group>"; };
+		29ED6ED121A3EC8C00686FFE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		29F876A3218BE253005E368B /* LPAnimationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LPAnimationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29F876A6218BE253005E368B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29F876A8218BE253005E368B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29ED6ED221A3EC8C00686FFE /* MessageUI.framework in Frameworks */,
 				2961B0E221A3DCFC005FE824 /* TableViewDragger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -183,11 +186,20 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
+		29ED6ED021A3EC8C00686FFE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29ED6ED121A3EC8C00686FFE /* MessageUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		29F8769A218BE253005E368B = {
 			isa = PBXGroup;
 			children = (
 				29F876A5218BE253005E368B /* LPAnimationDemo */,
 				29F876A4218BE253005E368B /* Products */,
+				29ED6ED021A3EC8C00686FFE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

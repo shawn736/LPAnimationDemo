@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import MessageUI
 
 class MainViewController: UIViewController {
   
   @IBOutlet weak var mainTableView: UITableView!
-  let configData = ["View Animations", "Layer Animations", "View Controller Transitions", "UIViewPropertyAnimator", "Further Types Of Animations", "Navigation Drawer"]
+  let configData = ["View Animations", "Layer Animations", "View Controller Transitions", "UIViewPropertyAnimator", "Further Types Of Animations", "Navigation Drawer", "Mail Respond"]
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -53,6 +54,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     case 5:
       let vc = self.storyboard?.instantiateViewController(withIdentifier: "DrawerViewController") as! DrawerViewController
       navigationController?.pushViewController(vc, animated: true)
+    case 6:
+      if MFMailComposeViewController.canSendMail() {
+        //注意这个实例要写在if block里，否则无法发送邮件时会出现两次提示弹窗（一次是系统的）
+        let mailComposeViewController = configuredMailComposeViewController()
+        self.present(mailComposeViewController, animated: true, completion: nil)
+      } else {
+        self.showSendMailErrorAlert()
+      }
     default:
       let vc = ViewAnimationViewController(titleName: configData[indexPath.item])
       navigationController?.pushViewController(vc, animated: true)
@@ -61,3 +70,39 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
   
 }
 
+extension MainViewController: MFMailComposeViewControllerDelegate {
+  func configuredMailComposeViewController() -> MFMailComposeViewController {
+    
+    let mailComposeVC = MFMailComposeViewController()
+    mailComposeVC.mailComposeDelegate = self
+    
+    //设置邮件地址、主题及正文
+    mailComposeVC.setToRecipients(["<你的邮箱地址>"])
+    mailComposeVC.setSubject("<邮件主题>")
+    mailComposeVC.setMessageBody("<邮件正文>", isHTML: false)
+    
+    return mailComposeVC
+    
+  }
+  
+  func showSendMailErrorAlert() {
+    
+    let sendMailErrorAlert = UIAlertController(title: "无法发送邮件", message: "您的设备尚未设置邮箱，请在“邮件”应用中设置后再尝试发送。", preferredStyle: .alert)
+    sendMailErrorAlert.addAction(UIAlertAction(title: "确定", style: .default) { _ in })
+    self.present(sendMailErrorAlert, animated: true){}
+    
+  }
+  
+  func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    switch result {
+    case .cancelled:
+      print("取消发送")
+    case .sent:
+      print("发送成功")
+    default:
+      break
+    }
+    self.dismiss(animated: true, completion: nil)
+    
+  }
+}
