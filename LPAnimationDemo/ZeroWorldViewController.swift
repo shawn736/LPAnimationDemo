@@ -25,7 +25,7 @@ class ZeroWorldViewController: UIViewController {
   
   // MARK: - Constants
   fileprivate let radius: CGFloat = 10
-  fileprivate let collectorAnimationDuration = 5.0
+  fileprivate let collectorAnimationDuration = 3.0
   fileprivate let dotSpeed: CGFloat = 60 // points per second
   fileprivate let colors = [#colorLiteral(red: 0.08235294118, green: 0.6980392157, blue: 0.5411764706, alpha: 1), #colorLiteral(red: 0.07058823529, green: 0.5725490196, blue: 0.4470588235, alpha: 1), #colorLiteral(red: 0.9333333333, green: 0.7333333333, blue: 0, alpha: 1), #colorLiteral(red: 0.9411764706, green: 0.5450980392, blue: 0, alpha: 1), #colorLiteral(red: 0.1411764706, green: 0.7803921569, blue: 0.3529411765, alpha: 1), #colorLiteral(red: 0.1176470588, green: 0.6431372549, blue: 0.2941176471, alpha: 1), #colorLiteral(red: 0.8784313725, green: 0.4156862745, blue: 0.03921568627, alpha: 1), #colorLiteral(red: 0.7882352941, green: 0.2470588235, blue: 0, alpha: 1), #colorLiteral(red: 0.1490196078, green: 0.5098039216, blue: 0.8352941176, alpha: 1), #colorLiteral(red: 0.1137254902, green: 0.4156862745, blue: 0.6784313725, alpha: 1), #colorLiteral(red: 0.8823529412, green: 0.2, blue: 0.1607843137, alpha: 1), #colorLiteral(red: 0.7019607843, green: 0.1411764706, blue: 0.1098039216, alpha: 1), #colorLiteral(red: 0.537254902, green: 0.2352941176, blue: 0.662745098, alpha: 1), #colorLiteral(red: 0.4823529412, green: 0.1490196078, blue: 0.6235294118, alpha: 1), #colorLiteral(red: 0.6862745098, green: 0.7137254902, blue: 0.7333333333, alpha: 1), #colorLiteral(red: 0.1529411765, green: 0.2196078431, blue: 0.2980392157, alpha: 1), #colorLiteral(red: 0.1294117647, green: 0.1843137255, blue: 0.2470588235, alpha: 1), #colorLiteral(red: 0.5137254902, green: 0.5843137255, blue: 0.5843137255, alpha: 1), #colorLiteral(red: 0.4235294118, green: 0.4745098039, blue: 0.4784313725, alpha: 1)]
   
@@ -56,11 +56,30 @@ class ZeroWorldViewController: UIViewController {
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    // First touch to start the game
+    // First touch to start the collect
     if zeroWorldState == .ready {
       startCollect()
     }
     
+    if let touchLocation = event?.allTouches?.first?.location(in: view) {
+      // Move the collector to the new position
+      moveCollector(to: touchLocation)
+      
+      // Move all enemies to the new position to trace the collector
+      moveDots(to: touchLocation)
+    }
+  }
+  
+  override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    if let touchLocation = event?.allTouches?.first?.location(in: view) {
+      // Move the collector to the new position
+      moveCollector(to: touchLocation)
+      
+      // Move all enemies to the new position to trace the collector
+//      moveDots(to: touchLocation)
+    }
+  }
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     if let touchLocation = event?.allTouches?.first?.location(in: view) {
       // Move the collector to the new position
       moveCollector(to: touchLocation)
@@ -125,10 +144,8 @@ class ZeroWorldViewController: UIViewController {
 
 fileprivate extension ZeroWorldViewController {
   func setupCollectorView() {
-    collectorView.bounds.size = CGSize(width: radius * 2, height: radius * 2)
-    collectorView.layer.cornerRadius = radius
+    resetCollectorViewSize()
     collectorView.backgroundColor = #colorLiteral(red: 0.7098039216, green: 0.4549019608, blue: 0.9607843137, alpha: 1)
-    
     view.addSubview(collectorView)
   }
   
@@ -167,6 +184,7 @@ fileprivate extension ZeroWorldViewController {
   }
   
   func collectOver() {
+    resetCollectorViewSize()
     stopCollect()
     displayCollectOverAlert()
   }
@@ -176,6 +194,11 @@ fileprivate extension ZeroWorldViewController {
     stopDisplayLink()
     stopAnimators()
     zeroWorldState = .collectOver
+  }
+  
+  func resetCollectorViewSize() {
+    collectorView.bounds.size = CGSize(width: radius * 2, height: radius * 2)
+    collectorView.layer.cornerRadius = radius
   }
   
   func prepareCollect() {
@@ -230,17 +253,38 @@ fileprivate extension ZeroWorldViewController {
   
   /*
    presentation： 获取当前显示的layer的copy
-   intersects: 判断两个rect是否有交集，有交集就认为游戏失败collectOver
+   intersects: 判断两个rect是否有交集，有交集就增大collectorView的大小
    */
   func checkCollision() {
     dotViews.forEach {
-      guard let collectorFrame = collectorView.layer.presentation()?.frame,
-        let dotFrame = $0.layer.presentation()?.frame,
-        collectorFrame.intersects(dotFrame) else {
-          return
+      if $0.isHidden == false {
+        guard let collectorFrame = collectorView.layer.presentation()?.frame,
+          let dotCenter = $0.layer.presentation()?.position, self.isInCircleRect(point: dotCenter, rect: collectorFrame) else {
+            return
+        }
+        $0.isHidden = true
+        increaseCollectorSize(dt: 1.0)
       }
-      collectOver()
     }
+  }
+  // 判断点在不在圆内
+  func isInCircleRect(point: CGPoint, rect: CGRect) -> Bool {
+    let radius = rect.size.width*0.5
+    let center = CGPoint(x: rect.origin.x + radius, y: rect.origin.y + radius)
+    let dx = abs(point.x - center.x)
+    let dy = abs(point.y - center.y)
+    let dis = hypot(dx, dy)
+    return (dis <= radius)
+  }
+  
+  func increaseCollectorSize(dt: Double) {
+    let scale = UIViewPropertyAnimator(duration: 1, curve: .easeIn)
+    scale.addAnimations{
+      self.collectorView.frame.size.width += CGFloat(10*dt)
+      self.collectorView.frame.size.height += CGFloat(10*dt)
+      self.collectorView.layer.cornerRadius = self.collectorView.frame.size.width * 0.5
+    }
+    scale.startAnimation()
   }
   
   func moveCollector(to touchLocation: CGPoint) {
