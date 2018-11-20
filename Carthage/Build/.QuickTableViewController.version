@@ -1,0 +1,21 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+    {
+      "name" : "QuickTableViewController",
+      "hash" : "1a3d42434cceb42bc8bc614e26369706ddea6ba3563c84e5370435a6f52e20a6"
+    }
+  ],
+  "commitish" : "v1.0.0",
+  "iOS" : [
+    {
+      "name" : "QuickTableViewController",
+      "hash" : "6025895cc778ed04f0719c29e9abc599b855ecbb59bcef0f65a4830a69e5f6a6"
+    }
+  ]
+}
