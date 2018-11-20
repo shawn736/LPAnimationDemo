@@ -1,0 +1,11 @@
+framework module TableViewDragger {
+  umbrella header "TableViewDragger.h"
+
+  export *
+  module * { export * }
+}
+
+module TableViewDragger.Swift {
+    header "TableViewDragger-Swift.h"
+    requires objc
+}

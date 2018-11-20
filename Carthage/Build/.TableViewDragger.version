@@ -1,0 +1,18 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "1.3.0",
+  "iOS" : [
+    {
+      "name" : "TableViewDragger",
+      "hash" : "52f39ddab3079d52cb7853cd1ec463654870aeceb6d1c18b2932af01fdbc1f2d"
+    }
+  ]
+}

@@ -11,7 +11,7 @@ import UIKit
 class MainViewController: UIViewController {
   
   @IBOutlet weak var mainTableView: UITableView!
-  let configData = ["View Animations", "Layer Animations", "View Controller Transitions", "UIViewPropertyAnimator", "Further Types Of Animations"]
+  let configData = ["View Animations", "Layer Animations", "View Controller Transitions", "UIViewPropertyAnimator", "Further Types Of Animations", "Navigation Drawer"]
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -49,6 +49,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
       navigationController?.pushViewController(vc, animated: true)
     case 4:
       let vc = FurtherTypesViewController(titleName: configData[indexPath.item])
+      navigationController?.pushViewController(vc, animated: true)
+    case 5:
+      let vc = self.storyboard?.instantiateViewController(withIdentifier: "DrawerViewController") as! DrawerViewController
       navigationController?.pushViewController(vc, animated: true)
     default:
       let vc = ViewAnimationViewController(titleName: configData[indexPath.item])

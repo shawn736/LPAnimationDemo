@@ -13,6 +13,8 @@
 		292EDC27219041C1005A27D3 /* FurtherTypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292EDC26219041C1005A27D3 /* FurtherTypesViewController.swift */; };
 		292EDC2921904FE1005A27D3 /* AnimatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292EDC2821904FE1005A27D3 /* AnimatorFactory.swift */; };
 		292EDC2B21912FF0005A27D3 /* SaveTheDotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292EDC2A21912FF0005A27D3 /* SaveTheDotViewController.swift */; };
+		2961B0DC21A3D49D005FE824 /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2961B0DB21A3D49D005FE824 /* DrawerViewController.swift */; };
+		2961B0E221A3DCFC005FE824 /* TableViewDragger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2961B0E121A3DCFC005FE824 /* TableViewDragger.framework */; };
 		29E9BE15218BEACD00DABFFB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BE14218BEACD00DABFFB /* BaseViewController.swift */; };
 		29E9BE18218BEC9600DABFFB /* ViewAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BE17218BEC9600DABFFB /* ViewAnimationViewController.swift */; };
 		29E9BE85218BF19E00DABFFB /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BE60218BF19E00DABFFB /* LICENSE */; };
@@ -67,6 +69,8 @@
 		292EDC26219041C1005A27D3 /* FurtherTypesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurtherTypesViewController.swift; sourceTree = "<group>"; };
 		292EDC2821904FE1005A27D3 /* AnimatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorFactory.swift; sourceTree = "<group>"; };
 		292EDC2A21912FF0005A27D3 /* SaveTheDotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTheDotViewController.swift; sourceTree = "<group>"; };
+		2961B0DB21A3D49D005FE824 /* DrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
+		2961B0E121A3DCFC005FE824 /* TableViewDragger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TableViewDragger.framework; path = Carthage/Build/iOS/TableViewDragger.framework; sourceTree = SOURCE_ROOT; };
 		29E9BE14218BEACD00DABFFB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		29E9BE17218BEC9600DABFFB /* ViewAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnimationViewController.swift; sourceTree = "<group>"; };
 		29E9BE60218BF19E00DABFFB /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -121,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2961B0E221A3DCFC005FE824 /* TableViewDragger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,8 +202,10 @@
 		29F876A5218BE253005E368B /* LPAnimationDemo */ = {
 			isa = PBXGroup;
 			children = (
+				2961B0E121A3DCFC005FE824 /* TableViewDragger.framework */,
 				29E9BE5F218BF19E00DABFFB /* SnapKit */,
 				29F876A8218BE253005E368B /* MainViewController.swift */,
+				2961B0DB21A3D49D005FE824 /* DrawerViewController.swift */,
 				29E9BE17218BEC9600DABFFB /* ViewAnimationViewController.swift */,
 				29E9BEAB218C588B00DABFFB /* LayerAnimationViewController.swift */,
 				292EDC2021904024005A27D3 /* ViewControllerTransitionsViewController.swift */,
@@ -228,6 +235,7 @@
 				29F8769F218BE253005E368B /* Sources */,
 				29F876A0218BE253005E368B /* Frameworks */,
 				29F876A1218BE253005E368B /* Resources */,
+				2961B0DD21A3DAEE005FE824 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -287,6 +295,29 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2961B0DD21A3DAEE005FE824 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/TableViewDragger.framework",
+			);
+			name = Carthage;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TableViewDragger.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		29F8769F218BE253005E368B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -333,6 +364,7 @@
 				29E9BE95218BF19E00DABFFB /* ConstraintView.swift in Sources */,
 				29E9BE87218BF19E00DABFFB /* LayoutConstraintItem.swift in Sources */,
 				29E9BE94218BF19E00DABFFB /* UILayoutSupport+Extensions.swift in Sources */,
+				2961B0DC21A3D49D005FE824 /* DrawerViewController.swift in Sources */,
 				292EDC2121904024005A27D3 /* ViewControllerTransitionsViewController.swift in Sources */,
 				29E9BE8F218BF19E00DABFFB /* ConstraintDSL.swift in Sources */,
 				29E9BE97218BF19E00DABFFB /* ConstraintLayoutSupport.swift in Sources */,
@@ -484,6 +516,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S6W7TXYNQR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = LPAnimationDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -502,6 +538,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S6W7TXYNQR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = LPAnimationDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
