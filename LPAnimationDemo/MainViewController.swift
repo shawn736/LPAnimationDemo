@@ -13,7 +13,7 @@ import UIDeviceComplete
 class MainViewController: UIViewController {
   
   @IBOutlet weak var mainTableView: UITableView!
-  let configData = ["View Animations", "Layer Animations", "View Controller Transitions", "UIViewPropertyAnimator", "Further Types Of Animations", "Navigation Drawer", "Mail Respond"]
+  let configData = ["View Animations", "Layer Animations", "View Controller Transitions", "UIViewPropertyAnimator", "Further Types Of Animations", "Navigation Drawer", "Mail Respond", "Quick Setting"]
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -63,6 +63,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
       } else {
         self.showSendMailErrorAlert()
       }
+    case 7:
+      let vc = QuickSettingViewController()
+      navigationController?.pushViewController(vc, animated: true)
     default:
       let vc = ViewAnimationViewController(titleName: configData[indexPath.item])
       navigationController?.pushViewController(vc, animated: true)

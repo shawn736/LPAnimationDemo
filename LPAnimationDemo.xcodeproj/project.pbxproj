@@ -15,6 +15,8 @@
 		292EDC2B21912FF0005A27D3 /* SaveTheDotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292EDC2A21912FF0005A27D3 /* SaveTheDotViewController.swift */; };
 		2961B0DC21A3D49D005FE824 /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2961B0DB21A3D49D005FE824 /* DrawerViewController.swift */; };
 		2961B0E221A3DCFC005FE824 /* TableViewDragger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2961B0E121A3DCFC005FE824 /* TableViewDragger.framework */; };
+		29BB0CB721A555B500341095 /* QuickSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BB0CB621A555B500341095 /* QuickSettingViewController.swift */; };
+		29BB0CB921A5565300341095 /* QuickTableViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29BB0CB821A5565300341095 /* QuickTableViewController.framework */; };
 		29E9BE15218BEACD00DABFFB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BE14218BEACD00DABFFB /* BaseViewController.swift */; };
 		29E9BE18218BEC9600DABFFB /* ViewAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BE17218BEC9600DABFFB /* ViewAnimationViewController.swift */; };
 		29E9BE85218BF19E00DABFFB /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BE60218BF19E00DABFFB /* LICENSE */; };
@@ -73,6 +75,8 @@
 		292EDC2A21912FF0005A27D3 /* SaveTheDotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTheDotViewController.swift; sourceTree = "<group>"; };
 		2961B0DB21A3D49D005FE824 /* DrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
 		2961B0E121A3DCFC005FE824 /* TableViewDragger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TableViewDragger.framework; path = Carthage/Build/iOS/TableViewDragger.framework; sourceTree = SOURCE_ROOT; };
+		29BB0CB621A555B500341095 /* QuickSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSettingViewController.swift; sourceTree = "<group>"; };
+		29BB0CB821A5565300341095 /* QuickTableViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTableViewController.framework; path = Carthage/Build/iOS/QuickTableViewController.framework; sourceTree = SOURCE_ROOT; };
 		29E9BE14218BEACD00DABFFB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		29E9BE17218BEC9600DABFFB /* ViewAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnimationViewController.swift; sourceTree = "<group>"; };
 		29E9BE60218BF19E00DABFFB /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 			files = (
 				29ED6ED221A3EC8C00686FFE /* MessageUI.framework in Frameworks */,
 				29ED6ED421A4093D00686FFE /* UIDeviceComplete.framework in Frameworks */,
+				29BB0CB921A5565300341095 /* QuickTableViewController.framework in Frameworks */,
 				2961B0E221A3DCFC005FE824 /* TableViewDragger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,11 +222,13 @@
 		29F876A5218BE253005E368B /* LPAnimationDemo */ = {
 			isa = PBXGroup;
 			children = (
+				29BB0CB821A5565300341095 /* QuickTableViewController.framework */,
 				29ED6ED321A4093C00686FFE /* UIDeviceComplete.framework */,
 				2961B0E121A3DCFC005FE824 /* TableViewDragger.framework */,
 				29E9BE5F218BF19E00DABFFB /* SnapKit */,
 				29F876A8218BE253005E368B /* MainViewController.swift */,
 				2961B0DB21A3D49D005FE824 /* DrawerViewController.swift */,
+				29BB0CB621A555B500341095 /* QuickSettingViewController.swift */,
 				29E9BE17218BEC9600DABFFB /* ViewAnimationViewController.swift */,
 				29E9BEAB218C588B00DABFFB /* LayerAnimationViewController.swift */,
 				292EDC2021904024005A27D3 /* ViewControllerTransitionsViewController.swift */,
@@ -322,6 +329,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/TableViewDragger.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/UIDeviceComplete.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/QuickTableViewController.framework",
 			);
 			name = Carthage;
 			outputFileListPaths = (
@@ -329,6 +337,7 @@
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TableViewDragger.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/UIDeviceComplete.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/QuickTableViewController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -360,6 +369,7 @@
 				29F876A9218BE253005E368B /* MainViewController.swift in Sources */,
 				29E9BE9E218BF19E00DABFFB /* ConstraintLayoutGuideDSL.swift in Sources */,
 				29E9BE96218BF19E00DABFFB /* ConstraintLayoutGuide.swift in Sources */,
+				29BB0CB721A555B500341095 /* QuickSettingViewController.swift in Sources */,
 				29E9BE9D218BF19E00DABFFB /* ConstraintRelation.swift in Sources */,
 				290EB85F219571A600BC6899 /* ZeroWorldViewController.swift in Sources */,
 				29F876A7218BE253005E368B /* AppDelegate.swift in Sources */,

@@ -1,0 +1,11 @@
+framework module UIDeviceComplete {
+  umbrella header "UIDeviceComplete.h"
+
+  export *
+  module * { export * }
+}
+
+module UIDeviceComplete.Swift {
+    header "UIDeviceComplete-Swift.h"
+    requires objc
+}

@@ -1,0 +1,18 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "2.2.0",
+  "iOS" : [
+    {
+      "name" : "UIDeviceComplete",
+      "hash" : "9c32f37faa07fa0b6fa67d7c3e3123ba2101d85e800641c016eed16d987e30fc"
+    }
+  ]
+}
