@@ -13,7 +13,7 @@ import UIDeviceComplete
 class MainViewController: UIViewController {
   
   @IBOutlet weak var mainTableView: UITableView!
-  let configData = ["View Animations", "Layer Animations", "View Controller Transitions", "UIViewPropertyAnimator", "Further Types Of Animations", "Navigation Drawer", "Mail Respond", "Quick Setting"]
+  let configData = ["View Animations", "Layer Animations", "View Controller Transitions", "UIViewPropertyAnimator", "Further Types Of Animations", "Navigation Drawer", "Mail Respond", "Quick Setting", "Point Transform"]
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -65,6 +65,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
       }
     case 7:
       let vc = QuickSettingViewController()
+      navigationController?.pushViewController(vc, animated: true)
+    case 8:
+      let vc = PointTransformViewController()
+      vc.view.backgroundColor = .white
       navigationController?.pushViewController(vc, animated: true)
     default:
       let vc = ViewAnimationViewController(titleName: configData[indexPath.item])
